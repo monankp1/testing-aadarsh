@@ -21,13 +21,11 @@ export function UserProfile() {
   };
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const { user: authUser } = useAuth(); // Get the logged-in user's details if needed for authentication
   console.log(user, "<< user");
   useEffect(() => {
     const fetchUserDetails = async () => {
       setLoading(true);
-      setError(null);
       try {
         // Assume that you pass the user ID somehow, here's an example URL
         const response = await axios.post(
@@ -41,7 +39,6 @@ export function UserProfile() {
           throw new Error("Failed to fetch user details");
         }
       } catch (err) {
-        setError("Failed to fetch data");
         console.error(err, "errorrrr");
       } finally {
         setLoading(false);
@@ -254,6 +251,7 @@ export function UserProfile() {
                     </Diva5>
                     <Diva5>
                       <img
+                        alt=""
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/4c2f01616e0b48fe211740b08583c18ce275de08ee7055eb9dbddca44b3a0c8b?apiKey=3250d16d0ad044539de68d3e33600ce8&"
                       />
@@ -313,34 +311,6 @@ const Diva2 = styled.div`
   flex-direction: column;
 `;
 
-const Div3 = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  color: rgba(39, 0, 37, 0.7);
-  padding: 0 20px;
-`;
-
-const Img = styled.img`
-  aspect-ratio: 1.18;
-  object-fit: auto;
-  object-position: center;
-  width: 81px;
-  fill: #fff;
-  border-color: rgba(29, 15, 42, 1);
-  // border-style: solid;
-  border-top-width: 1px;
-  border-right-width: 3px;
-  border-bottom-width: 1px;
-  border-left-width: 3px;
-  align-self: center;
-`;
-
-const Div4 = styled.div`
-  font-family: Poppins, sans-serif;
-  margin-top: 8px;
-`;
-
 const Div5 = styled.div`
   justify-content: center;
   align-self: start;
@@ -380,17 +350,7 @@ const Div7 = styled.div`
   flex-direction: column;
   font-weight: 700;
 `;
-const Label = styled.span`
-  font-size: 12px;
-  /* Add other styles */
-`;
 
-const Value = styled.span`
-  font-size: 20px;
-  line-height: 20px;
-  color: rgba(29, 15, 42, 1);
-  /* Add other styles */
-`;
 const Div8 = styled.div`
   border-radius: 25px;
   background: linear-gradient(180deg, #ffffff 0%, #d29cfd 100%);
@@ -507,18 +467,6 @@ const Div21 = styled.div`
   font-family: Overlock, sans-serif;
 `;
 
-const Img4 = styled.img`
-  object-fit: auto;
-  object-position: center;
-  width: 100%;
-  stroke-width: 1px;
-  stroke: #1d0f2a;
-  border-color: rgba(29, 15, 42, 1);
-  border-style: solid;
-  border-width: 1px;
-  margin-top: 20px;
-`;
-
 const Div22 = styled.div`
   color: #270025;
   margin-top: 19px;
@@ -566,16 +514,6 @@ const Imgs = styled.img`
 
 const Diva6 = styled.div`
   font-family: Overlock, sans-serif;
-`;
-
-const Diva7 = styled.div`
-  justify-content: center;
-  border-radius: 10px;
-  background-color: var(--Title, #fff);
-  display: flex;
-  margin-top: 12px;
-  gap: 12px;
-  padding: 0 8px;
 `;
 
 const Diva8 = styled.div`

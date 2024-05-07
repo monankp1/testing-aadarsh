@@ -1,46 +1,46 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   AppBar,
   CssBaseline,
   Box,
-  useTheme,
-  useMediaQuery,
+  // useTheme,
+  // useMediaQuery,
 } from "@mui/material";
 import BottomNavigation from "@mui/material/BottomNavigation";
 
 import { BottomNavigationBar } from "../components/BottomNavigationBar";
 import { AppTopBar } from "../components/AppTopBar";
 import ShibirRoute from "../components/ShibirRoute";
-import AnnouncementCard from "../components/Announcement";
+// import AnnouncementCard from "../components/Announcement";
 import Notification from "../components/Notification";
 import MemoriesSection from "../components/Memories";
-import QRScanner from "../components/QRScanner";
+// import QRScanner from "../components/QRScanner";
 
 const Home = () => {
-  const [result, setResult] = useState("");
-  const [scanError, setScanError] = useState(null);
-  const [showScanner, setShowScanner] = useState(false);
-  const userName = "Bhavesh patel"; // Replace with actual username
+  // const [result, setResult] = useState("");
+  // const [scanError, setScanError] = useState(null);
+  // const [showScanner, setShowScanner] = useState(false);
+  // const userName = "Bhavesh patel"; // Replace with actual username
 
-  const handleScan = (data) => {
-    if (data) {
-      console.log(data.text, "<<<<-data.text");
-      setResult(data.text);
-    }
-  };
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const handleError = (err) => {
-    setScanError(err);
-  };
+  // const handleScan = (data) => {
+  //   if (data) {
+  //     console.log(data.text, "<<<<-data.text");
+  //     setResult(data.text);
+  //   }
+  // };
+  // const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  // const handleError = (err) => {
+  //   setScanError(err);
+  // };
 
-  const handleScanIconClick = () => {
-    setShowScanner(true);
-  };
+  // const handleScanIconClick = () => {
+  //   setShowScanner(true);
+  // };
 
-  const handleCloseScanner = () => {
-    setShowScanner(false);
-  };
+  // const handleCloseScanner = () => {
+  //   setShowScanner(false);
+  // };
 
   return (
     <div className="appBackground">

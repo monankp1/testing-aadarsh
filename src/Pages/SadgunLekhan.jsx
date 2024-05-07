@@ -91,44 +91,6 @@ const AppContainer = styled.div`
   color: #1d0f2a;
 `;
 
-const Header = styled.header`
-  background: var(
-    --Light-Pink-Gradient,
-    linear-gradient(168deg, #fff 0%, #e2c2ff 70.31%)
-  );
-`;
-
-const StatusBar = styled.div`
-  background: var(
-    --BG-Gredient,
-    linear-gradient(180deg, #270025 0%, #1d0f2a 100%)
-  );
-  color: #fff;
-  font-size: 16px;
-
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: -0.38px;
-  line-height: 129%;
-  padding: 10px 18px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-`;
-
-const TimeDisplay = styled.div`
-  font-feature-settings: "case" on;
-  font-family: SF Pro Text, sans-serif;
-  padding: 4px 9px;
-`;
-
-const StatusIcons = styled.img`
-  width: 71px;
-  aspect-ratio: 5.88;
-  object-fit: auto;
-  margin: auto 0;
-`;
-
 const Main = styled.main`
   padding: 0 16px;
   margin-top: 17px;

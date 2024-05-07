@@ -1,7 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
 import InfoIcon from "@mui/icons-material/InfoTwoTone";
-import ImageComponent, { ImageDetails } from "../components/ImageDetails";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -251,14 +250,6 @@ const RouteTitle = styled.h2`
   font: 700 20px/1 Arial, sans-serif;
 `;
 
-const RouteLink = styled.a`
-  margin: auto 0;
-  color: #270025;
-  font: 400 15px Poppins, sans-serif;
-  text-decoration: none;
-  cursor: pointer;
-`;
-
 const Div14 = styled.div`
   border-radius: 25px;
   background: linear-gradient(180deg, #ffffff 0%, #d29cfd 100%);
@@ -329,18 +320,6 @@ const Img3 = styled.img`
 
 const Div21 = styled.div`
   font-family: Overlock, sans-serif;
-`;
-
-const Img4 = styled.img`
-  object-fit: auto;
-  object-position: center;
-  width: 100%;
-  stroke-width: 1px;
-  stroke: #1d0f2a;
-  border-color: rgba(29, 15, 42, 1);
-  border-style: solid;
-  border-width: 1px;
-  margin-top: 20px;
 `;
 
 const Div22 = styled.div`

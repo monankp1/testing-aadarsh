@@ -3,7 +3,6 @@ import styled from "styled-components";
 // import InfoIcon from "@mui/icons-material/Info";
 import InfoIcon from "@mui/icons-material/InfoTwoTone";
 import { useNavigate } from "react-router-dom";
-import { BottomNavigationBar } from "./BottomNavigationBar";
 const timeSlots = [
   { time: "11.30 PM", location: "Bharuch" },
   { time: "02.30 AM", location: "Tithal" },
