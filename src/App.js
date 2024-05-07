@@ -1,24 +1,66 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./Pages/Login";
+import Home from "./Pages/Home";
+import "./App.css"; // Make sure your stylesheet is correctly imported
+import { SadgunLekhan } from "./Pages/SadgunLekhan";
+import ShibirRoute from "./Pages/ShibirRoute";
+import UserProfile from "./Pages/UserProfile";
+import ImageDetails from "./components/ImageDetails";
+import { AuthProvider } from "./contexts/AuthProvider";
+import { PrivateRoute } from "./contexts/PrivateRoute";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/sadgun-lekhan"
+            element={
+              <PrivateRoute>
+                <SadgunLekhan />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/shibir-route"
+            element={
+              <PrivateRoute>
+                <ShibirRoute />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/user-profile"
+            element={
+              <PrivateRoute>
+                <UserProfile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/image-details"
+            element={
+              <PrivateRoute>
+                <ImageDetails />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </AuthProvider>
+    </Router>
   );
 }
 
