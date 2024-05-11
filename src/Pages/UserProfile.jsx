@@ -12,16 +12,56 @@ import { BottomNavigationBar } from "../components/BottomNavigationBar";
 import QRScanner from "../components/QRScanner";
 
 export function UserProfile() {
+  const [result, setResult] = useState("");
+  const [scanError, setScanError] = useState(null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { logout, user: authUser } = useAuth(); // Get the logged-in user's details if needed for authentication
+  const [showScanner, setShowScanner] = useState(false);
+
+  const handleToggleScanner = () => {
+    setShowScanner(!showScanner); // Toggle the visibility of the scanner
+  };
+  const handleScan = async (data) => {
+    if (data) {
+      console.log(data.text, "<<<<-data.text");
+      setResult(data.text);
+      setShowScanner(false); // Close the scanner after getting the result
+
+      // API call with the scanned data
+      try {
+        const response = await axios.post("YOUR_API_ENDPOINT", {
+          scannedData: data.text,
+        });
+        console.log(response.data, "<<--API response");
+
+        // Handle the response data here
+        // For example, if you want to update user state or navigate
+      } catch (error) {
+        console.error("Error calling API:", error);
+        setScanError(error);
+      }
+    }
+  };
+
+  const handleError = (err) => {
+    setScanError(err);
+  };
+
+  const handleScanIconClick = () => {
+    setShowScanner(true);
+  };
+
+  const handleCloseScanner = () => {
+    setShowScanner(false);
+  };
 
   const handleLogout = () => {
     logout();
     navigate("/"); // Assuming your login route is the root
   };
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const { user: authUser } = useAuth(); // Get the logged-in user's details if needed for authentication
+
   console.log(user, "<< user");
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -56,20 +96,29 @@ export function UserProfile() {
       >
         <TopBar>
           <IconButton onClick={() => navigate(-1)}>
-            {" "}
-            {/* Navigate back */}
             <ArrowBackIosNewIcon />
           </IconButton>
           <IconButton onClick={handleLogout}>
             <LogoutIcon />
           </IconButton>
         </TopBar>
-        <QRScanner />
 
         {loading ? (
           <div className=" loading">Loading...</div>
         ) : (
           <>
+            <IconButton onClick={handleToggleScanner}>
+              {showScanner ? "" : "Open Scanner"}{" "}
+              {/* Display appropriate text based on state */}
+            </IconButton>
+
+            {showScanner && (
+              <QRScanner
+                handleScan={handleScan}
+                handleError={handleError}
+                handleClose={handleCloseScanner} // Pass this if you want to handle close inside the QRScanner component
+              />
+            )}
             <Div2>
               <Div5>
                 <Img2

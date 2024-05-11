@@ -24,7 +24,7 @@ export function ShibirRoutes() {
   };
   return (
     <>
-      <RouteContainer style={{ marginTop: "20px" }}>
+      <RouteContainer style={{ margin: "5px 10px" }}>
         <RouteIcon
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/1748993d8450ee1bcce7efb0b04e5d91974a0de7e3bf14584193c83fe6dfbbd0?apiKey=3250d16d0ad044539de68d3e33600ce8&"
           alt="Route Icon"

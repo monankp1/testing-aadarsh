@@ -17,6 +17,7 @@ import Nashik from "./Pages/routeDetails/Nashik";
 import Pune from "./Pages/routeDetails/Pune";
 import Tithal from "./Pages/routeDetails/Tithal";
 import Imagicaa from "./Pages/routeDetails/Imagicaa";
+import Score from "./Pages/Score";
 
 function App() {
   return (
@@ -45,6 +46,14 @@ function App() {
             element={
               <PrivateRoute>
                 <ShibirRoute />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/score"
+            element={
+              <PrivateRoute>
+                <Score />
               </PrivateRoute>
             }
           />

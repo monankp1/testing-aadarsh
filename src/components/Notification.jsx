@@ -13,7 +13,7 @@ const notifications = [
 
 export function Notification() {
   return (
-    <main>
+    <main style={{ margin: "10px" }}>
       <Header>
         <ShibirIcon
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/197f4e4d4003a76749d4e3eb18b0791c4198df0367c4fbb643279406995244d8?apiKey=3250d16d0ad044539de68d3e33600ce8&"
