@@ -1,0 +1,95 @@
+import { IconButton } from "@mui/material";
+import * as React from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+
+export function Imagicaa() {
+  const navigate = useNavigate();
+  return (
+    <>
+      <IconButton onClick={() => navigate(-1)}>
+        {" "}
+        {/* Navigate back */}
+        <ArrowBackIosNewIcon />
+      </IconButton>
+      <MainContainer>
+        <TemplePageContainer>
+          <Header>
+            <Title>Imagicaa</Title>
+          </Header>
+          <TempleImageWrapper>
+            <TempleImage
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/351507c98c19beda031a9ab798515020e4dfe2b615ea1d64e6a0c47ee617db8e?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+              alt="BAPS Shree Swaminarayan Mandir, Imagicaa"
+            />
+          </TempleImageWrapper>
+        </TemplePageContainer>
+
+        <Content>
+          <Paragraph>
+            2013 માં શરૂ થયેલ આ થીમ પાર્ક 130 એકરમાં ફેલાયેલ છે. મુખ્ય પાર્ક 6 વિભાગમાં વહેંચાયેલો છે. એકવામેજિકા વોટર પાર્કમાં વોટર સ્લાઇડ્સ, રાફ્ટિંગ રાઇડ, મેટ રેસર, લેઝી રિવર, વેવ પૂલ અને કિડી પૂલ વગેરે માણવા લાયક છે. 2016 માં ઇન્ડોર સ્નો પાર્કની પણ શરૂઆત થઈ.
+            <br />
+          </Paragraph>
+
+
+
+
+        </Content>
+      </MainContainer>
+    </>
+  );
+}
+
+const MainContainer = styled.div`
+  position: relative;
+  margin-top: 21px;
+  height: auto;
+  padding: 0 20px;
+`;
+
+const Header = styled.header`
+  background-color: #fff;
+`;
+
+const Title = styled.h2`
+  background-color: #fff;
+`;
+
+const Content = styled.section`
+  background-color: #fff;
+`;
+
+const Paragraph = styled.p`
+  background-color: #fff;
+`;
+
+const TemplePageContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+`;
+
+const TempleTitle = styled.h1`
+  color: var(--BG-Pink, #270025);
+  font: 700 19px Overlock, sans-serif;
+`;
+
+const TempleImageWrapper = styled.figure`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 17px;
+  border-radius: 8px;
+`;
+
+const TempleImage = styled.img`
+  width: 100%;
+  aspect-ratio: 1.47;
+  object-fit: cover;
+  object-position: center;
+`;
+
+export default Imagicaa;

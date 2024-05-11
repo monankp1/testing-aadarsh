@@ -22,8 +22,37 @@ export const ShibirRoutes = () => {
   const navigate = useNavigate(); // Hook to handle navigation
 
   // Handler to navigate to the details page
-  const handleIcon = () => {
-    navigate("/image-details"); // Navigate to the ImageDetails component page
+  const handleIcon = (location) => {
+    switch (location) {
+      case 'Bharuch':
+        navigate("/Bharuch-details");
+        break;
+
+      case 'Navsari':
+        navigate("/Navsari-details");
+        break;
+
+      case 'Pune':
+        navigate("/Pune-details");
+        break;
+
+      case 'Tithal':
+        navigate("/Tithal-details");
+        break;
+
+      case 'Imagicaa':
+        navigate("/Imagicaa-details");
+        break;
+
+      case 'Nashik':
+        navigate("/Nashik-details");
+        break;
+
+
+      default:
+        break;
+    }
+    // Navigate to the ImageDetails component page
   };
   return (
     <>
@@ -48,7 +77,7 @@ export const ShibirRoutes = () => {
               key={index}
               time={slot.time}
               location={slot.location}
-              handleIcon={handleIcon}
+              handleIcon={() => handleIcon(slot.location)}
             />
           ))}
         </DesktopTimeSlots>
