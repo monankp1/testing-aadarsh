@@ -14,6 +14,7 @@ import ShibirRoute from "../components/ShibirRoute";
 // import AnnouncementCard from "../components/Announcement";
 import Notification from "../components/Notification";
 import MemoriesSection from "../components/Memories";
+import QuizeStarter from "../components/QuizStarter";
 // import QRScanner from "../components/QRScanner";
 
 const Home = () => {
@@ -60,6 +61,7 @@ const Home = () => {
         {/* Main Content */}
         <ShibirRoute />
         <MemoriesSection />
+        <QuizeStarter />
         {/* ... your QR scanner code here */}
         <BottomNavigation
           sx={{
@@ -67,6 +69,7 @@ const Home = () => {
             marginTop: "100px",
             position: "fixed",
             bottom: "0px",
+            width: "100%", // Make sure BottomNavigation spans the full width
           }}
         >
           <BottomNavigationBar />

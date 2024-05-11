@@ -11,6 +11,7 @@ import UserProfile from "./Pages/UserProfile";
 import ImageDetails from "./components/ImageDetails";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { PrivateRoute } from "./contexts/PrivateRoute";
+import Score from "./Pages/Score";
 
 function App() {
   return (
@@ -39,6 +40,14 @@ function App() {
             element={
               <PrivateRoute>
                 <ShibirRoute />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/score"
+            element={
+              <PrivateRoute>
+                <Score />
               </PrivateRoute>
             }
           />

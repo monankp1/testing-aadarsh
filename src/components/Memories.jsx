@@ -80,6 +80,7 @@ const MemoriesHeader = styled.header`
   display: flex;
   align-items: center;
   gap: 8px;
+  margin: 8px 10px 0 10px;
   color: #1d0f2a;
   padding: 0 8px;
 `;

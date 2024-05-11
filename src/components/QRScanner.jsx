@@ -1,38 +1,10 @@
-// import React, { useState } from "react";
-// import QrScanner from "react-qr-scanner";
-
-// const QRScanner = ({ handleScan }) => {
-//   const [error, setError] = useState(null);
-
-//   const handleError = (err) => {
-//     setError(err);
-//   };
-
-//   return (
-//     <div>
-//       <QrScanner
-//         delay={300}
-//         onError={handleError}
-//         onScan={handleScan}
-//         style={{ width: "100%" }}
-//       />
-//       {error && <p>{error.message}</p>}
-//     </div>
-//   );
-// };
-
-// export default QRScanner;
 import React from "react";
 import { QrReader } from "react-qr-reader";
 
-const QRScanner = ({ handleScan }) => {
-  const handleError = (error) => {
-    console.error("QR Scan Error:", error);
-  };
-
+const QRScanner = ({ handleScan, handleError, handleClose }) => {
   const handleResult = (result, error) => {
     if (result) {
-      handleScan(result.text);
+      handleScan(result);
     }
     if (error) {
       handleError(error);
@@ -41,6 +13,9 @@ const QRScanner = ({ handleScan }) => {
 
   return (
     <div style={{ width: "100%" }}>
+      <button onClick={handleClose} style={{ marginBottom: "10px" }}>
+        Close Scanner
+      </button>
       <QrReader
         delay={300}
         constraints={{ facingMode: "environment" }}
