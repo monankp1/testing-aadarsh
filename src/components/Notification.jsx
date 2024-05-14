@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
 
 const notifications = [
   {
@@ -12,6 +13,11 @@ const notifications = [
 ];
 
 export function Notification() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/notifications")
+  }
   return (
     <main style={{ margin: "10px" }}>
       <Header>
@@ -20,7 +26,7 @@ export function Notification() {
           alt="Shibir Icon"
         />
         <ShibirUpdateTitle>Shibir Update</ShibirUpdateTitle>
-        <ViewAllLink>View All</ViewAllLink>
+        <ViewAllLink onClick={handleClick}>View All</ViewAllLink>
       </Header>
       {notifications.map((notification) => (
         <NotificationCard key={notification.id} notification={notification} />

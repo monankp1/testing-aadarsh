@@ -15,7 +15,7 @@ const timeSlots = [
   { time: "01.00 PM", location: "Trambak" },
 ];
 
-export function ShibirRoutes() {
+export function ShibirRoute() {
   const navigate = useNavigate(); // Hook to handle navigation
 
   // Handler to navigate to the details page
@@ -178,4 +178,4 @@ const RouteLink = styled.a`
   cursor: pointer;
 `;
 
-export default ShibirRoutes;
+export default ShibirRoute;

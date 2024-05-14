@@ -60,7 +60,10 @@ export const ShibirRoutes = () => {
         <IconButton onClick={() => navigate(-1)}>
           {" "}
           {/* Navigate back */}
-          <ArrowBackIosNewIcon />
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1fd569ca716b29d7f1a98071e37fd2287542114cc8243ecad11b40ab9ef936c8?apiKey=65b9bef5a9974c109a4afdb193963080&"
+            alt="Back button"
+          />
         </IconButton>
       </TopBar>
       <RouteContainer>
