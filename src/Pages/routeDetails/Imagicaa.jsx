@@ -23,7 +23,7 @@ export function Imagicaa() {
           </Header>
           <TempleImageWrapper>
             <TempleImage
-              src="https://www.savaari.com/blog/wp-content/uploads/2023/05/imagica-e1684226104112.jpg"
+              src="https://www.imagicaaworld.com/wp-content/uploads/2023/08/about_imagicaa_1.jpg"
               alt="BAPS Shree Swaminarayan Mandir, Imagicaa"
             />
           </TempleImageWrapper>
@@ -72,6 +72,8 @@ const Header = styled.header`
 
 const Title = styled.h2`
   background-color: #fff;
+  text-align: center;
+
 `;
 
 const Content = styled.section`

@@ -22,6 +22,53 @@ export function ShibirRoute() {
   const handleIcon = () => {
     navigate("/shibir-route"); // Navigate to the ImageDetails component page
   };
+
+  const handleClick = (location) => {
+    switch (location) {
+      case 'Bharuch':
+        navigate("/Bharuch-details");
+        break;
+
+      case 'Navsari':
+        navigate("/Navsari-details");
+        break;
+
+      case 'Pune':
+        navigate("/Pune-details");
+        break;
+
+      case 'Tithal':
+        navigate("/Tithal-details");
+        break;
+
+      case 'Imagicaa':
+        navigate("/Imagicaa-details");
+        break;
+
+      case 'Nashik':
+        navigate("/Nashik-details");
+        break;
+
+
+      default:
+        break;
+    }
+    // Navigate to the ImageDetails component page
+  };
+
+
+  const TimeSlot = ({ time, location }) => (
+    <TimeSlotWrapper>
+      <TimeDisplay>Schedule</TimeDisplay>
+      <LocationDisplay onClick={() => handleClick(location)}>
+        <LocationName>{location}</LocationName>
+        <LocationMarker>
+          <InfoIcon className="icon" /> {/* MUI Icon is used here */}
+        </LocationMarker>
+      </LocationDisplay>
+    </TimeSlotWrapper>
+  );
+
   return (
     <>
       <RouteContainer style={{ margin: "5px 10px" }}>
@@ -50,17 +97,7 @@ export function ShibirRoute() {
 
 
 
-const TimeSlot = ({ time, location }) => (
-  <TimeSlotWrapper>
-    <TimeDisplay>Schedule</TimeDisplay>
-    <LocationDisplay>
-      <LocationName>{location}</LocationName>
-      <LocationMarker>
-        <InfoIcon className="icon" /> {/* MUI Icon is used here */}
-      </LocationMarker>
-    </LocationDisplay>
-  </TimeSlotWrapper>
-);
+
 
 const TimeSlotContainer = styled.div`
   display: flex;

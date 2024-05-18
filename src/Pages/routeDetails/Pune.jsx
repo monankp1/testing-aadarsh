@@ -26,7 +26,7 @@ export function Pune() {
                     </Header>
                     <TempleImageWrapper>
                         <TempleImage
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/351507c98c19beda031a9ab798515020e4dfe2b615ea1d64e6a0c47ee617db8e?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+                            src="https://www.baps.org/Data/Sites/1/Media/ModuleRotatorImages/baps_pune_worldwide.jpg"
                             alt="BAPS Shree Swaminarayan Mandir, Pune"
                         />
                     </TempleImageWrapper>
@@ -174,6 +174,7 @@ const TempleImage = styled.img`
   aspect-ratio: 1.47;
   object-fit: cover;
   object-position: center;
+  border-radius: 10px;
 `;
 
 export default Pune;
