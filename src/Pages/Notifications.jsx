@@ -93,11 +93,6 @@ function Notifications() {
 
 
 
-
-
-
-            <BottomNavigationBar />
-
         </Page >
 
     );

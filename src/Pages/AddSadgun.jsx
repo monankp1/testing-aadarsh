@@ -13,26 +13,7 @@ function AddSadgun() {
                 alt="Back icon"
             />
 
-            <ProfileHeader>
-                <div style={{ display: "flex" }}>
-                    <ProfileImage
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/ab67d02a8b8ad216eae4c696c2a0e629a71d161cc2bc274895d9505e7b4ec172?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                        alt="Profile"
-                    />
-                    <ProfileName>Sadgun</ProfileName>
-                </div>
-                <div>
-                    <EditIcon
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e9f56142362a559defafc29aa548926f7fb8e117a7358468604dd0021cbc1f9?apiKey=65b9bef5a9974c109a4afdb193963080&"
-                    />
-                    <ShareIcon
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/327e9842161cffc0e8bf443682725a7f26bd11bd2a3236feda354ec08eeb9fda?apiKey=65b9bef5a9974c109a4afdb193963080&"
-                    />
-                    <DeleteIcon
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/1c314bb94f1387b222d4a470d229d43cdce914acf79587c9c9ea52526c8ae4ac?apiKey=65b9bef5a9974c109a4afdb193963080&"
-                    />
-                </div>
-            </ProfileHeader>
+
         </AppBackground>
     )
 }

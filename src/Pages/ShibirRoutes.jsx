@@ -173,7 +173,6 @@ export const ShibirRoutes = () => {
           </Div15>
         </Div14>
       </TimeSlotContainer>
-      <BottomNavigationBar />
     </>
   );
 };
