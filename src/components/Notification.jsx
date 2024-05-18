@@ -5,15 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { BACKEND_ENDPOINT } from "../api/api";
 
-// const notifications = [
-//   {
-//     id: 1,
-//     name: "P. Anirdesh Swami",
-//     time: "12:42 PM",
-//     message:
-//       "All the yuvak-yuvati shibirarthi will be held at the yagnapurush sabha mandapam after lunch for the first session of our shibir latest by 2.00 PM Keep diary and pen with you for note down the memories of the shibir session.",
-//   },
-// ];
+
 
 function Notification() {
   const navigate = useNavigate();
@@ -180,7 +172,7 @@ function Notification() {
 
 const Card = styled.article`
   border-radius: 16px;
-  border: 0.5px solid var(--new-stroke-gradient, #1d0f2a);
+  border: 0.5px  var(--new-stroke-gradient, #1d0f2a);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   background: var(
     --light-pink-gradient,
@@ -227,7 +219,7 @@ const CloseButton = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: red;
+  // background-color: red;
   border: none;
   border-radius: 100px;
   color: #red;

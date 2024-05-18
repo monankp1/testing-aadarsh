@@ -7,23 +7,18 @@ import { BACKEND_ENDPOINT } from '../api/api';
 import { ToastContainer, toast } from "react-toastify"
 
 
-function AddSadgun() {
-    const [sadgun, setSadgun] = useState('');
+function AddFoundItem() {
+    const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const reference = useRef();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setSadgun(e.target.value);
+        setMessage(e.target.value);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        if (sadgun.length < 100) {
-            toast.warning('Write minimum 100 characters to save.');
-            return;
-        }
 
 
         const user = JSON.parse(localStorage.getItem('user'));
@@ -31,10 +26,10 @@ function AddSadgun() {
         console.log("id", id)
         const data = {
             shibir_id: id,
-            sadgun: sadgun
+            description: message
         };
 
-        axios.post(`${BACKEND_ENDPOINT}/sadgun/post_sadgun`, data, {
+        axios.post(`${BACKEND_ENDPOINT}/lost_and_found/post_lost_and_found`, data, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -60,18 +55,18 @@ function AddSadgun() {
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
                     alt="Back icon"
                 />
-                <SaveButton type='submit' form="sadgunForm">Save</SaveButton>
+                <SaveButton type='submit' form="foundForm">Save</SaveButton>
             </Header>
-            <form id="sadgunForm" onSubmit={handleSubmit}>
+            <form id="foundForm" onSubmit={handleSubmit}>
 
                 <InputBox>
                     <StyledInput
                         type='text'
                         ref={reference}
-                        value={sadgun}
+                        value={message}
                         onChange={handleChange}
                         required
-                        placeholder='Type the sadgun here (minimum 100 Characters required)'
+                        placeholder='Type the short description of item'
                     />
                 </InputBox>
             </form>
@@ -154,4 +149,4 @@ const ErrorMessage = styled.div`
 `;
 
 
-export default AddSadgun;
+export default AddFoundItem;

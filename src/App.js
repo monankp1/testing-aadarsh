@@ -20,6 +20,8 @@ import Imagicaa from "./Pages/routeDetails/Imagicaa";
 import Notifications from "./Pages/Notifications";
 import AddSadgun from "./Pages/AddSadgun";
 import Score from "./Pages/Score";
+import LostAndFound from "./Pages/LostAndFound";
+import AddFoundItem from "./Pages/AddFoundItem";
 
 function App() {
   return (
@@ -132,6 +134,24 @@ function App() {
             element={
               <PrivateRoute>
                 <AddSadgun />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/lostandfound"
+            element={
+              <PrivateRoute>
+                <LostAndFound />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/add-foundItem"
+            element={
+              <PrivateRoute>
+                <AddFoundItem />
               </PrivateRoute>
             }
           />

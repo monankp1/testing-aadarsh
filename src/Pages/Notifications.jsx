@@ -119,8 +119,8 @@ const HeadingText = styled.h1`
     line-height: 8px; 
 `
 const Page = styled.div`
-    width: 390px;
-    height: 844px;
+    width: 100%;
+    height: 100%;
     flex-shrink: 0;
     background: var(--Light-Pink-Gradient, linear-gradient(168deg, #FFF 0%, #E2C2FF 70.31%));
 `
@@ -143,7 +143,7 @@ const NotificationIcon = styled.img`
 
 const Card = styled.article`
   border-radius: 16px;
-  border: 0.5px solid var(--new-stroke-gradient, #1d0f2a);
+  border: 0.5px  var(--new-stroke-gradient, #1d0f2a);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   background: var(
     --light-pink-gradient,
@@ -151,9 +151,12 @@ const Card = styled.article`
   );
   display: flex;
   flex-direction: column;
+  align-items: center;
+  position:relative;
+  left: 1.25rem;
   margin-top: 10px;
   padding: 24px;
-  width: 100%;
+  width: 90%;
 `;
 
 const ShowMoreButton = styled.button`

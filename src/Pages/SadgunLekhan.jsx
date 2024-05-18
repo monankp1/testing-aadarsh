@@ -2,37 +2,90 @@ import * as React from "react";
 import styled from "styled-components";
 import { BottomNavigationBar } from "../components/BottomNavigationBar";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { BACKEND_ENDPOINT } from "../api/api";
 
-const blogPosts = [
-  {
-    id: 1,
-    date: "May 29, 2024, 12:42 PM",
-    title: "Mandir, one of the base pillars of Hindu culture",
-    excerpt:
-      "The Mandir, or Hindu temple, stands as one of the foundational pillars of Hindu culture, serving as a sacred space where devotees connect with the divine, partake in rituals, and uphold their religious heritage. Rooted in centuries of tradition, these architectural marvels hold not only spiritual significance but also cultural and historical importance. The Mandir is a testament to the profound and diverse aspects of Hinduism, encompassing devotion, art, architecture, and communal identity.",
-  },
-  {
-    id: 2,
-    date: "May 29, 2024, 12:42 PM",
-    title: "My first shibir yatra towards history of BAPS mandirs",
-    excerpt:
-      "The spiritual journey undertaken by devotees of the BAPS Swaminarayan Mandir from Rajkot to various locations, including Bochaasan, Navasari, Nasik, Pune, and Chansad, holds profound significance in their spiritual growth and connection with their faith. This journey encompasses not only physical travel but also a deep internal exploration of one's beliefs, values, and relationship with the divine.",
-  },
-  {
-    id: 3,
-    date: "May 29, 2024, 12:42 PM",
-    title: "Why mandir is a must in society?",
-    excerpt:
-      "The journey typically involves a series of stops at various Swaminarayan temples and centers, where devotees engage in shibir sessions and spiritual discourses. These sessions are guided by spiritual leaders and scholars, offering profound insights into the teachings of Swaminarayan Bhagwan and the principles of the BAPS organization. Participants are encouraged to reflect on their lives, cultivate inner virtues, and strengthen their bond with God.",
-  },
-];
+// const blogPosts = [
+//   {
+//     id: 1,
+//     date: "May 29, 2024, 12:42 PM",
+//     title: "Mandir, one of the base pillars of Hindu culture",
+//     excerpt:
+//       "The Mandir, or Hindu temple, stands as one of the foundational pillars of Hindu culture, serving as a sacred space where devotees connect with the divine, partake in rituals, and uphold their religious heritage. Rooted in centuries of tradition, these architectural marvels hold not only spiritual significance but also cultural and historical importance. The Mandir is a testament to the profound and diverse aspects of Hinduism, encompassing devotion, art, architecture, and communal identity.",
+//   },
+//   {
+//     id: 2,
+//     date: "May 29, 2024, 12:42 PM",
+//     title: "My first shibir yatra towards history of BAPS mandirs",
+//     excerpt:
+//       "The spiritual journey undertaken by devotees of the BAPS Swaminarayan Mandir from Rajkot to various locations, including Bochaasan, Navasari, Nasik, Pune, and Chansad, holds profound significance in their spiritual growth and connection with their faith. This journey encompasses not only physical travel but also a deep internal exploration of one's beliefs, values, and relationship with the divine.",
+//   },
+//   {
+//     id: 3,
+//     date: "May 29, 2024, 12:42 PM",
+//     title: "Why mandir is a must in society?",
+//     excerpt:
+//       "The journey typically involves a series of stops at various Swaminarayan temples and centers, where devotees engage in shibir sessions and spiritual discourses. These sessions are guided by spiritual leaders and scholars, offering profound insights into the teachings of Swaminarayan Bhagwan and the principles of the BAPS organization. Participants are encouraged to reflect on their lives, cultivate inner virtues, and strengthen their bond with God.",
+//   },
+// ];
+
+const formatDatestamp = (dateString) => {
+  const notificationDate = new Date(dateString);
+  const today = new Date();
+
+  // Check if the notification date is today
+  if (notificationDate.toDateString() === today.toDateString()) {
+    // If it's today, return 'Today'
+    return 'Today';
+  } else {
+    // If it's not today, format the date as "3rd May, 2024"
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = notificationDate.toLocaleDateString('en-US', options);
+    return formattedDate;
+  }
+}
+
+const formatTimestamp = (timeString) => {
+  const [hours, minutes, seconds] = timeString.split(':');
+  let formattedHours = parseInt(hours);
+  const ampm = formattedHours >= 12 ? 'PM' : 'AM';
+  formattedHours = formattedHours % 12 || 12;
+  const formattedTime = `${formattedHours}:${minutes} ${ampm}`;
+  return formattedTime;
+}
+
 
 function SadgunLekhan() {
+  const [sadguns, setSadguns] = useState([]);
   const navigate = useNavigate(); // Hook to handle navigation
 
   const handleClick = () => {
     navigate("/add-sadgun");
   }
+
+  const fetchData = async () => {
+    try {
+      let response = await axios.get(`${BACKEND_ENDPOINT}/sadgun/get_all`);
+      setSadguns(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  useEffect(() => {
+    fetchData();
+
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 30000);
+
+    // Clear interval on component unmount
+    return () => clearInterval(interval);
+
+  }, [])
+  console.log(sadguns)
+
 
 
   return (
@@ -54,43 +107,33 @@ function SadgunLekhan() {
               alt="Add New Sadgun"
             />
           </ProfileHeader>
-          <BlogPostList>
-            {blogPosts.map((post) => (
-              <BlogPost key={post.id}>
-                <PostHeader>
-                  <PostDate>{post.date}</PostDate>
-                  <CalendarIcon
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/1c4bec91cb45f74e906b78dd51b0d41eda6d7b367b073af84cce487d571e3c9b?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                    alt="Calendar"
-                  />
-                </PostHeader>
-                <PostTitle>{post.title}</PostTitle>
-                <PostExcerpt>{post.excerpt}</PostExcerpt>
-                <ReadMore>
-                  <ReadMoreText>Read more</ReadMoreText>
-                  <ArrowIcon
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/ab039f5976f7dade28db2b426cbbc549d3f595e6fff12442d50b0cbd32b04b12?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                    alt="Arrow"
-                  />
-                </ReadMore>
-              </BlogPost>
-            ))}
-          </BlogPostList>
+          {sadguns && sadguns.map((item) => (
+            <Card>
+              <DateTime>
+                {formatDatestamp(item.date)},{formatTimestamp(item.time)}
+              </DateTime>
+              <Sadgun>
+                {item.sadgun}
+              </Sadgun>
+              <Name>
+                by:  {item.by.name}
+              </Name>
+            </Card>
+          ))}
+
+
         </Main>
       </AppContainer>
-      <BottomNavigationBar />
     </AppBackground>
   );
 }
 
 const AppBackground = styled.div`
   background: linear-gradient(180deg, #ffffff 0%, #e2c2ff 100%);
-  // min-height: 100vh; // Ensure it covers the full viewport height
-  // Rest of your styles...
+  height: 100%; // Ensure it covers the full viewport height
 `;
 const AppContainer = styled.div`
   border-radius: 30px;
-  background: linear-gradient(180deg, #ffffff 0%, #e2c2ff 100%);
   max-width: 480px;
   width: 100%;
   margin: 0 auto;
@@ -142,15 +185,48 @@ const SettingsIcon = styled.img`
   object-fit: auto;
 `;
 
-// const BlogPost = styled.article`
-//   border-radius: 25px;
-//   background-color: rgba(29, 15, 42, 0.7);
-//   border: 2px solid rgba(29, 15, 42, 1);
-//   padding: 15px 26px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-// `;
+const Card = styled.article`
+  border-radius: 16px;
+  border: 0.5px  var(--new-stroke-gradient, #1d0f2a);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: var(
+    --light-pink-gradient,
+    linear-gradient(168deg, #fff 0%, #e2c2ff 70.31%)
+  );
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 24px;
+  width: 100%;
+  
+`;
+
+const DateTime = styled.div`
+color: rgba(39, 0, 37, 0.50);
+
+font-family: Overlock;
+font-size: 1rem;
+font-style: normal;
+font-weight: 700;
+line-height: 136%; /* 16.32px */
+`;
+
+const Sadgun = styled.p`
+  margin-top: 16px;
+  overflow: hidden;
+  color: rgba(39, 0, 37, 0.50);
+
+  text-align: justify;
+  font-family: Overlock;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 136%;
+`;
+
+const Name = styled.div`
+  color: black;
+`;
 
 const PostDate = styled.div`
   font-family: Overlock, sans-serif;
