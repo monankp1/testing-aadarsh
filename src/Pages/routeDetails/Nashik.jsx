@@ -12,11 +12,13 @@ export function Nashik() {
   }
   return (
     <>
-      <IconButton onClick={() => navigate(-1)}>
-        {" "}
+      <BackIcon onClick={() => navigate(-1)}>
         {/* Navigate back */}
-        <ArrowBackIosNewIcon />
-      </IconButton>
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/1fd569ca716b29d7f1a98071e37fd2287542114cc8243ecad11b40ab9ef936c8?apiKey=65b9bef5a9974c109a4afdb193963080&"
+          alt="Back button"
+        />
+      </BackIcon>
       <MainContainer>
         <TemplePageContainer>
           <Header>
@@ -169,6 +171,15 @@ const MainContainer = styled.div`
   margin-top: 21px;
   height: auto;
   padding: 0 20px;
+`;
+
+const BackIcon = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
 `;
 
 const Header = styled.header`

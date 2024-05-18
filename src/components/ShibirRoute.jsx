@@ -4,16 +4,16 @@ import styled from "styled-components";
 import InfoIcon from "@mui/icons-material/InfoTwoTone";
 import { useNavigate } from "react-router-dom";
 const timeSlots = [
-  { time: "11.30 PM", location: "Bharuch" },
-  { time: "02.30 AM", location: "Tithal" },
-  { time: "06.30 PM", location: "Navsari" },
-  { time: "11.30 AM", location: "Imagica" },
-  { time: "01.00 PM", location: "Trambak" },
-  { time: "01.00 PM", location: "Trambak" },
-  { time: "01.00 PM", location: "Trambak" },
-  { time: "01.00 PM", location: "Trambak" },
-  { time: "01.00 PM", location: "Trambak" },
+  { time: "Schedule", location: "Bharuch" },
+  { time: "Schedule", location: "Dhule" },
+  { time: "Schedule", location: "Ellora" },
+  { time: "09:00 PM", location: "Nashik" },
+  { time: "09:00 AM", location: "Pune" },
+  { time: "11:30 AM", location: "Imagicaa" },
+  { time: "02:30 AM", location: "Tithal" },
+  { time: "11:30 PM", location: "Bharuch" },
 ];
+
 
 export function ShibirRoute() {
   const navigate = useNavigate(); // Hook to handle navigation
@@ -48,9 +48,11 @@ export function ShibirRoute() {
   );
 }
 
+
+
 const TimeSlot = ({ time, location }) => (
   <TimeSlotWrapper>
-    <TimeDisplay>{time}</TimeDisplay>
+    <TimeDisplay>Schedule</TimeDisplay>
     <LocationDisplay>
       <LocationName>{location}</LocationName>
       <LocationMarker>
@@ -101,7 +103,8 @@ const TimeDisplay = styled.div`
   border-radius: 24px 24px 0 0;
   background-color: var(--New-Light-Dark, #c394ff);
   color: rgba(39, 0, 37, 0.5);
-  font: 300 12px/67% Rubik, sans-serif;
+  font: 500 12px/67% Rubik, sans-serif;
+  font-weight: bold;a
   justify-content: center;
 `;
 

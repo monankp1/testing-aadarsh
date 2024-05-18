@@ -4,54 +4,70 @@ import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { BottomNavigationBar } from "../components/BottomNavigationBar";
+import axios from 'axios';
+import { BACKEND_ENDPOINT } from "../api/api";
+import { useEffect, useState, useRef } from "react";
+import { useLocation } from 'react-router-dom';
 
 
 
+const formatDatestamp = (dateString) => {
+    const notificationDate = new Date(dateString);
+    const today = new Date();
 
+    // Check if the notification date is today
+    if (notificationDate.toDateString() === today.toDateString()) {
+        // If it's today, return 'Today'
+        return 'Today';
+    } else {
+        // If it's not today, format the date as "3rd May, 2024"
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        const formattedDate = notificationDate.toLocaleDateString('en-US', options);
+        return formattedDate;
+    }
+}
 
-const messages = [
-    {
-        sender: "P. Anirdesh Swami",
-        time: "12:42 PM",
-        message:
-            "All the yuvak-yuvati shibirarthi will be held at the yagnapurush sabha mandapam after lunch for the first session of our shibir latest by 2.00 PM Keep diary and pen with you for note down the memories of the shibir session.",
-    },
-    {
-        sender: "P. Anirdesh Swami",
-        time: "12:42 PM",
-        message:
-            "All the yuvak-yuvati shibirarthi will be held at the yagnapurush sabha mandapam after lunch for the first session of our shibir latest by 2.00 PM Keep diary and pen with you for note down the memories of the shibir session.",
-    },
-    {
-        sender: "P. Anirdesh Swami",
-        time: "12:42 PM",
-        message:
-            "All the yuvak-yuvati shibirarthi will be held at the yagnapurush sabha mandapam after lunch for the first session of our shibir latest by 2.00 PM Keep diary and pen with you for note down the memories of the shibir session.",
-    },
-    {
-        sender: "P. Anirdesh Swami",
-        time: "12:42 PM",
-        message:
-            "All the yuvak-yuvati shibirarthi will be held at the yagnapurush sabha mandapam after lunch for the first session of our shibir latest by 2.00 PM Keep diary and pen with you for note down the memories of the shibir session.",
-    },
-];
+const formatTimestamp = (timeString) => {
+    const [hours, minutes, seconds] = timeString.split(':');
+    let formattedHours = parseInt(hours);
+    const ampm = formattedHours >= 12 ? 'PM' : 'AM';
+    formattedHours = formattedHours % 12 || 12;
+    const formattedTime = `${formattedHours}:${minutes} ${ampm}`;
+    return formattedTime;
+}
+
 
 function Notifications() {
+    const [lastFetchTimestamp, setLastFetchTimestamp] = useState(null); // Track the timestamp of the last fetch
+    const [showDetailedAnnouncement, setShowDetailedAnnouncement] = useState(false);
+
+    const detailedAnnouncementRef = useRef(null);
+
+
     const navigate = useNavigate(); // Hook to handle navigation
+    const location = useLocation();
+    const { state } = location;
+    const notifications = state ? state.notifications : [];
+
+
+    console.log(notifications);
+    const handleShowDetailedAnnouncement = () => {
+        setShowDetailedAnnouncement(true);
+    };
+
+    const handleCloseDetailedAnnouncement = () => {
+        setShowDetailedAnnouncement(false);
+    };
 
     return (
         <Page>
-            <TopBar>
-                <IconButton onClick={() => navigate(-1)}>
-                    {" "}
-                    {/* Navigate back */}
-                    {/* <ArrowBackIosNewIcon /> */}
-                    <img
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/1fd569ca716b29d7f1a98071e37fd2287542114cc8243ecad11b40ab9ef936c8?apiKey=65b9bef5a9974c109a4afdb193963080&"
-                        alt="Back button"
-                    />
-                </IconButton>
-            </TopBar>
+            <BackIcon onClick={() => navigate(-1)}>
+                {/* Navigate back */}
+                <img
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/1fd569ca716b29d7f1a98071e37fd2287542114cc8243ecad11b40ab9ef936c8?apiKey=65b9bef5a9974c109a4afdb193963080&"
+                    alt="Back button"
+                />
+            </BackIcon>
 
             <Heading>
                 <NotificationIcon
@@ -61,29 +77,33 @@ function Notifications() {
                 <HeadingText>Shibir Updates</HeadingText>
             </Heading>
 
-            <div>
-                {messages.map((message, index) => (
-                    <NotificationCard key={index} >
-                        <CardName >
-                            <Author >
-                                {message.sender}
-                            </Author>
-                            <Time >
-                                {message.time}
-                            </Time>
-                        </CardName>
-                        <Message >
-                            {message.message}
+            {notifications && notifications.map((item, idx) => {
+                return (
+                    <Card key={idx}>
+                        <CardHeader>
+                            <SenderName>{item.by?.name}</SenderName>
+                            <Datestamp>{formatDatestamp(item.date)} at {formatTimestamp(item.time)}</Datestamp>
+                        </CardHeader>
+                        <Message>
+                            {item.announcement}
                         </Message>
-                    </NotificationCard>
-                ))}
-            </div>
+                    </Card>
+                )
+            })}
+
+
+
+
+
+
             <BottomNavigationBar />
 
         </Page >
 
     );
 }
+
+
 
 const Heading = styled.div`
     display: flex;
@@ -109,11 +129,13 @@ const Page = styled.div`
     flex-shrink: 0;
     background: var(--Light-Pink-Gradient, linear-gradient(168deg, #FFF 0%, #E2C2FF 70.31%));
 `
-const TopBar = styled.div`
+const BackIcon = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
      
 `;
 
@@ -124,53 +146,90 @@ const NotificationIcon = styled.img`
     fill: var(--BG-Gredient, linear-gradient(180deg, #270025 0%, #1D0F2A 100%));
 `
 
-const NotificationCard = styled.div`
-    margin: 1rem;
-    padding: 1rem;
-    border: 1px solid purple;
-    border-radius: 25px;
-    display: flex;
-    padding: 19.951px;
-    width: 325px;
-    flex-direction: column;
-    justify-content: center;
-    gap: 13.301px;
-    margin-left: 2rem;
-    border-radius: 13.301px;
-    border: 0.831px solid var(--New-Blue-Purple, #E2C2FF);
-    background: var(--Light-Pink-Gradient, linear-gradient(168deg, #FFF 0%, #E2C2FF 70.31%));
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+const Card = styled.article`
+  border-radius: 16px;
+  border: 0.5px solid var(--new-stroke-gradient, #1d0f2a);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: var(
+    --light-pink-gradient,
+    linear-gradient(168deg, #fff 0%, #e2c2ff 70.31%)
+  );
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 24px;
+  width: 100%;
 `;
 
-const CardName = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
-const Author = styled.div`
-    color: rgba(29, 15, 42, 0.75);
-    font-family: Rubik;
-    font-size: 13.301px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 6.65px;
-`
+const ShowMoreButton = styled.button`
+background-color: transparent;
+border: transparent;
+color: #333333;
+padding: 5px;
+cursor: pointer;
+`;
 
-const Time = styled.div`
-    color: rgba(29, 15, 42, 0.50);
-    font-family: Poppins;
-    font-size: 11.638px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 6.65px;
-`
+const TransparentBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
 
-const Message = styled.div`
-    color: var(--BG-Purple, #1D0F2A);
-    font-family: Overlock;
-    font-size: 11.638px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-`
+const DetailedAnnouncementModal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 65vh;
+  transform: translate(-50%, -50%);
+  background: var(--Light-Pink-Gradient, linear-gradient(168deg, #FFF 0%, #E2C2FF 70.31%));  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  border: none;
+  border-radius: 100px;
+  color: #red;
+  font-size: 16px;
+  cursor: pointer;
+`;
+
+const DetailedAnnouncement = styled.p`
+  color: #333333;
+  font-size: 16px;
+`;
+
+const CardHeader = styled.header`
+  gap: 16px;
+  font-weight: 300;
+`;
+
+const SenderName = styled.h3`
+  color: rgba(29, 15, 42, 0.8);
+  flex: 1;
+  font: 16px/50% Rubik, sans-serif;
+`;
+
+const Datestamp = styled.time`
+  color: rgba(29, 15, 42, 0.7);
+  font: 14px/57% Poppins, sans-serif;
+`;
+
+const Message = styled.p`
+  color: var(--bg-purple, #1d0f2a);
+  font: 700 14px Overlock, sans-serif;
+  margin-top: 16px;
+`;
+
+
 
 export default Notifications;

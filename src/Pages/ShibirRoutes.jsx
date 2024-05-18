@@ -7,14 +7,13 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { BottomNavigationBar } from "../components/BottomNavigationBar";
 
 const timeSlots = [
+  { time: "11:30 PM", location: "Bharuch" },
   { time: "06:00 AM", location: "Dhule" },
   { time: "01:00 PM", location: "Ellora" },
   { time: "09:00 PM", location: "Nashik" },
-  { time: "01:00 PM", location: "Trambak" },
   { time: "09:00 AM", location: "Pune" },
   { time: "11:30 AM", location: "Imagicaa" },
   { time: "02:30 AM", location: "Tithal" },
-  { time: "06:30 PM", location: "Navsari" },
   { time: "11:30 PM", location: "Bharuch" },
 ];
 
@@ -56,16 +55,13 @@ export const ShibirRoutes = () => {
   };
   return (
     <>
-      <TopBar>
-        <IconButton onClick={() => navigate(-1)}>
-          {" "}
-          {/* Navigate back */}
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1fd569ca716b29d7f1a98071e37fd2287542114cc8243ecad11b40ab9ef936c8?apiKey=65b9bef5a9974c109a4afdb193963080&"
-            alt="Back button"
-          />
-        </IconButton>
-      </TopBar>
+      <BackIcon onClick={() => navigate(-1)}>
+        {/* Navigate back */}
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/1fd569ca716b29d7f1a98071e37fd2287542114cc8243ecad11b40ab9ef936c8?apiKey=65b9bef5a9974c109a4afdb193963080&"
+          alt="Back button"
+        />
+      </BackIcon>
       <RouteContainer>
         <RouteIcon
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/1748993d8450ee1bcce7efb0b04e5d91974a0de7e3bf14584193c83fe6dfbbd0?apiKey=3250d16d0ad044539de68d3e33600ce8&"
@@ -214,11 +210,13 @@ const TimeSlotWrapper = styled.div`
   flex-direction: column;
   box-shadow: 0px 3px 4px rgba(39, 0, 37, 0.25);
 `;
-const TopBar = styled.div`
+const BackIcon = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
 `;
 const TimeDisplay = styled.div`
   padding: 16px;
@@ -266,6 +264,8 @@ const RouteContainer = styled.div`
   gap: 8px;
   margin-top: 15px;
   padding: 0 8px;
+  margin-left: 1rem;
+  margin-right: 1rem;
 `;
 
 const RouteIcon = styled.img`

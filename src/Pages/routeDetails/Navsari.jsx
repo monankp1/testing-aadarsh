@@ -12,11 +12,16 @@ export function Navsari() {
     }
     return (
         <>
-            <IconButton onClick={() => navigate(-1)}>
-                {" "}
-                {/* Navigate back */}
-                <ArrowBackIosNewIcon />
-            </IconButton>
+            <TopBar>
+                <IconButton onClick={() => navigate(-1)}>
+                    {" "}
+                    {/* Navigate back */}
+                    <img
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/1fd569ca716b29d7f1a98071e37fd2287542114cc8243ecad11b40ab9ef936c8?apiKey=65b9bef5a9974c109a4afdb193963080&"
+                        alt="Back button"
+                    />
+                </IconButton>
+            </TopBar>
             <MainContainer>
                 <TemplePageContainer>
                     <Header>
@@ -210,6 +215,14 @@ const TempleImage = styled.img`
   aspect-ratio: 1.47;
   object-fit: cover;
   object-position: center;
+`;
+const TopBar = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
 `;
 
 export default Navsari;

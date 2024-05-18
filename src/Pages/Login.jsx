@@ -16,10 +16,13 @@ function Button({ children, onClick }) {
           justify-content: center;
           align-items: center;
           gap: 8px;
+          height: 2.5rem;
+          justify-content: center;
           padding: 5px 20px;
+          margin: 0px 2.5rem ;
           border-radius: 8px;
-          background-color: #ff71bc;
-          box-shadow: 0px 2px 1px 0px rgba(238, 169, 205, 0.8);
+          background: var(--New-Blue-Purple, #E2C2FF);          
+          box-shadow: 0px 2px 1px 0px #A87900;          
           font-size: 16px;
           font-weight: 600;
           line-height: 50%;
@@ -28,6 +31,7 @@ function Button({ children, onClick }) {
           cursor: pointer;
         }
       `}</style>
+
     </button>
   );
 }
@@ -154,6 +158,7 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+
             <a
               href="#"
               className="forgot-password"
@@ -161,11 +166,14 @@ function Login() {
             >
               Forgot Password?
             </a>
+
             <ChangePassword
               isOpen={isModalOpen}
               onClose={() => setModalOpen(false)}
             />
-            <Button onClick={handleLogin}>Let's take a tour of shibir</Button>
+            <Button onClick={handleLogin}>Let's take a tour of Shibir</Button>
+
+
           </form>
         </section>
         <img

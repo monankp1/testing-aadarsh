@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { BottomNavigationBar } from "../components/BottomNavigationBar";
+import { useNavigate } from "react-router-dom";
 
 const blogPosts = [
   {
@@ -26,12 +27,19 @@ const blogPosts = [
   },
 ];
 
-export function SadgunLekhan() {
+function SadgunLekhan() {
+  const navigate = useNavigate(); // Hook to handle navigation
+
+  const handleClick = () => {
+    navigate("/add-sadgun");
+  }
+
+
   return (
     <AppBackground>
       <AppContainer>
         <Main>
-          <BackIcon
+          <BackIcon onClick={() => navigate(-1)}
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
             alt="Back icon"
           />
@@ -41,9 +49,9 @@ export function SadgunLekhan() {
               alt="Profile"
             />
             <ProfileName>Sadgun Lekhan</ProfileName>
-            <SettingsIcon
+            <SettingsIcon onClick={handleClick}
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/4c694fe63eee666fe1ae7b582df3d2174962135b8c9920c689ab652682988add?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-              alt="Settings"
+              alt="Add New Sadgun"
             />
           </ProfileHeader>
           <BlogPostList>
@@ -209,6 +217,7 @@ const ReadMore = styled.div`
   text-align: right;
   color: #8e44ad; /* Purple color for 'read more' */
   font-size: 14px; /* Adjust the font size as needed */
+  display: flex
 `;
 const BlogPost = styled.article`
   border-radius: 25px;
@@ -220,3 +229,6 @@ const BlogPost = styled.article`
   margin-bottom: 16px; /* Space between posts, adjust as needed */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
 `;
+
+
+export default SadgunLekhan;
