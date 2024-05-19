@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const images = [
-  {
-    src: "https://uc81deed2a3023407aa55608af2d.previews.dropboxusercontent.com/p/thumb/ACRLxJJIc3B4lpMxHUp1YZB6kG68GGy3cO9bsAA7PxsxjiWFbx-9zugxzXz22juZ4i5C34rRlXVlLYwBAMV_VOwN8USxdLWiwb6BzClA2VswPPhauefrJEcjjxeg23xe3lXm-bHgjutLylKXkrnjE_I3uayIBqsBTvIp7spivjlKXoHIY8lZKYqQlQyOmUB_AVkFR2EOxaIY9p22kbcM-lxrJbriU5PBdvYjFJOY0vvIrCCA0Tf_k4PbsEUiGKKRPGY98kt0sRra1PI1iHyt4pe6xAkTTkazQXe-XY5_dEPxsk3p4_oe4G05YVhmLvlgo5AmnE6-PJMIRE7Zu1mC0JP2rHSHN8CyTPzmH-UsoktM3_JzGNVtjmEHmsnd9QhOlrk/p.jpeg",
-    aspectRatio: 1.41,
-  },
+  // {
+  //   src: "https://uc81deed2a3023407aa55608af2d.previews.dropboxusercontent.com/p/thumb/ACRLxJJIc3B4lpMxHUp1YZB6kG68GGy3cO9bsAA7PxsxjiWFbx-9zugxzXz22juZ4i5C34rRlXVlLYwBAMV_VOwN8USxdLWiwb6BzClA2VswPPhauefrJEcjjxeg23xe3lXm-bHgjutLylKXkrnjE_I3uayIBqsBTvIp7spivjlKXoHIY8lZKYqQlQyOmUB_AVkFR2EOxaIY9p22kbcM-lxrJbriU5PBdvYjFJOY0vvIrCCA0Tf_k4PbsEUiGKKRPGY98kt0sRra1PI1iHyt4pe6xAkTTkazQXe-XY5_dEPxsk3p4_oe4G05YVhmLvlgo5AmnE6-PJMIRE7Zu1mC0JP2rHSHN8CyTPzmH-UsoktM3_JzGNVtjmEHmsnd9QhOlrk/p.jpeg",
+  //   aspectRatio: 1.41,
+  // },
   {
     src: "https://www.imagicaaworld.com/wp-content/uploads/2023/08/about_imagicaa_1.jpg",
     aspectRatio: 1.52,
