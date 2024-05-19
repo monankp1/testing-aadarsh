@@ -1,57 +1,113 @@
 import * as React from "react";
 import styled from "styled-components";
-import { IconButton } from "@mui/material";
+import { BottomNavigation, IconButton } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
+import QuizStarter from "../components/QuizStarter";
+import { BottomNavigationBar } from "../components/BottomNavigationBar";
+
 function Score() {
   const navigate = useNavigate(); //
+
+  const handleClick = () => {
+    navigate("/play-activity");
+  };
+
   return (
     <>
-      <TopBar>
-        <IconButton onClick={() => navigate(-1)}>
-          {" "}
+      <Background>
+        <BackIcon onClick={() => navigate("/home")}>
           {/* Navigate back */}
-          <ArrowBackIosNewIcon />
-        </IconButton>
-      </TopBar>
-      <MemoriesHeader>
-        <MemoriesIcon
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/48e32c756171dfd83384040b5add7bdfba0735f59c6cb31f5a40dc08aa7053da?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-          alt="Memories Icon"
-        />
-        <MemoriesTitle>Your Activity Score</MemoriesTitle>
-      </MemoriesHeader>
-      <Div14>
-        <KnowMyGuruContainer>
-          <KnowMyGuruHeader>
-            <KnowMyGuruInfo>
-              <KnowMyGuruTitle>Know my guru</KnowMyGuruTitle>
-              <KnowMyGuruDescription>
-                Let's dive into the divine life of our beloved Guruhari Pramukh
-                Swami Maharaj
-              </KnowMyGuruDescription>
-            </KnowMyGuruInfo>
-            <KnowMyGuruImage
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/ba2932fbe8a110926d9f90421f1ad2cb5b5560f4bc9f4535c3dbfcb58ecdf4fe?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-              alt="Guruhari Pramukh Swami Maharaj"
-            />
-          </KnowMyGuruHeader>
-          <ScoreContainer>
-            <ScoreEmoji>🎉</ScoreEmoji>
-            <ScoreLabel>Your Score</ScoreLabel>
-            <ScoreValue>
-              12<ScoreMaxValue>/15</ScoreMaxValue>
-            </ScoreValue>
-          </ScoreContainer>
-        </KnowMyGuruContainer>
-      </Div14>
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1fd569ca716b29d7f1a98071e37fd2287542114cc8243ecad11b40ab9ef936c8?apiKey=65b9bef5a9974c109a4afdb193963080&"
+            alt="Back button"
+          />
+        </BackIcon>
+        <MemoriesHeader>
+          <MemoriesIcon
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/48e32c756171dfd83384040b5add7bdfba0735f59c6cb31f5a40dc08aa7053da?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+            alt="Memories Icon"
+          />
+          <MemoriesTitle>Your Score</MemoriesTitle>
+        </MemoriesHeader>
+        <Div14>
+          <KnowMyGuruContainer>
+            <KnowMyGuruHeader>
+              <KnowMyGuruInfo>
+                <KnowMyGuruTitle>Know my guru</KnowMyGuruTitle>
+                <KnowMyGuruDescription>
+                  Let's dive into the divine life of our beloved Guruhari Pramukh
+                  Swami Maharaj
+                </KnowMyGuruDescription>
+              </KnowMyGuruInfo>
+              <KnowMyGuruImage
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/ba2932fbe8a110926d9f90421f1ad2cb5b5560f4bc9f4535c3dbfcb58ecdf4fe?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+                alt="Guruhari Pramukh Swami Maharaj"
+              />
+            </KnowMyGuruHeader>
+            <ScoreContainer>
+              <ScoreEmoji>🎉</ScoreEmoji>
+              <ScoreLabel>Your Score</ScoreLabel>
+              <ScoreValue>
+                12<ScoreMaxValue>/15</ScoreMaxValue>
+              </ScoreValue>
+            </ScoreContainer>
+          </KnowMyGuruContainer>
+        </Div14>
+
+
+
+        <QuizStarter />
+
+
+        <BottomNavigation
+          sx={{
+            backgroundColor: "#0c1225",
+            marginTop: "100px",
+            position: "fixed",
+            bottom: "0px",
+            width: "100%", // Make sure BottomNavigation spans the full width
+          }}
+        >
+          <BottomNavigationBar />
+        </BottomNavigation>
+
+      </Background>
     </>
   );
 }
 
+const Background = styled.div`
+  background: linear-gradient(180deg, #ffffff 0%, #d29cfd 100%);
+  min-height: 100vh;
+  height: 100%
+
+`;
+
+const Quiz = styled.div`
+  display: flex;
+  padding: 9px 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  width: 50vw;
+  position: relative;
+  left: 6rem;
+  border-radius: 8px;
+  background: var(--again-new-gradient, linear-gradient(180deg, #C86FFF 0%, #BFA1FF 100%));
+  box-shadow: 0px 2px 1px 0px #270025;
+`;
+
+const PlayButtonIcon = styled.img`
+  width: 18px;
+  aspect-ratio: 1;
+  object-fit: cover;
+`;
+
 const Div14 = styled.div`
   border-radius: 25px;
-  background: linear-gradient(180deg, #ffffff 0%, #d29cfd 100%);
+  background: transparent;
   // margin: 25px;
   border-color: rgba(29, 15, 42, 1);
   // border-style: solid;
@@ -92,11 +148,13 @@ const KnowMyGuruTitle = styled.h2`
   -webkit-background-clip: text;
   -webkit-text-fill-color: #270025;
 `;
-const TopBar = styled.div`
+const BackIcon = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
 `;
 const KnowMyGuruDescription = styled.p`
   font: 400 14px/20px Sora, sans-serif;
@@ -164,8 +222,9 @@ const MemoriesHeader = styled.header`
   gap: 8px;
   margin: 20px 10px 0 10px;
 
-  color: #1d0f2a;
-  padding: 0 8px;
+  border-radius: 10px;
+  background: var(--Title, #FFF);
+    padding: 0 8px;
 `;
 
 const MemoriesIcon = styled.img`

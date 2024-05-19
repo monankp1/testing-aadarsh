@@ -7,105 +7,106 @@ import { BACKEND_ENDPOINT } from "../api/api";
 
 
 const formatDatestamp = (dateString) => {
-    const notificationDate = new Date(dateString);
-    const today = new Date();
+  const notificationDate = new Date(dateString);
+  const today = new Date();
 
-    // Check if the notification date is today
-    if (notificationDate.toDateString() === today.toDateString()) {
-        // If it's today, return 'Today'
-        return 'Today';
-    } else {
-        // If it's not today, format the date as "3rd May, 2024"
-        const options = { day: 'numeric', month: 'long', year: 'numeric' };
-        const formattedDate = notificationDate.toLocaleDateString('en-US', options);
-        return formattedDate;
-    }
+  // Check if the notification date is today
+  if (notificationDate.toDateString() === today.toDateString()) {
+    // If it's today, return 'Today'
+    return 'Today';
+  } else {
+    // If it's not today, format the date as "3rd May, 2024"
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = notificationDate.toLocaleDateString('en-US', options);
+    return formattedDate;
+  }
 }
 
 const formatTimestamp = (timeString) => {
-    const [hours, minutes, seconds] = timeString.split(':');
-    let formattedHours = parseInt(hours);
-    const ampm = formattedHours >= 12 ? 'PM' : 'AM';
-    formattedHours = formattedHours % 12 || 12;
-    const formattedTime = `${formattedHours}:${minutes} ${ampm}`;
-    return formattedTime;
+  const [hours, minutes, seconds] = timeString.split(':');
+  let formattedHours = parseInt(hours);
+  const ampm = formattedHours >= 12 ? 'PM' : 'AM';
+  formattedHours = formattedHours % 12 || 12;
+  const formattedTime = `${formattedHours}:${minutes} ${ampm}`;
+  return formattedTime;
 }
 
 
 function LostAndFound() {
-    const [lostItem, setLostItem] = useState([]);
-    const navigate = useNavigate(); // Hook to handle navigation
+  const [lostItem, setLostItem] = useState([]);
+  const navigate = useNavigate(); // Hook to handle navigation
 
-    const handleClick = () => {
-        navigate("/add-foundItem");
+  const handleClick = () => {
+    navigate("/add-foundItem");
+  }
+
+  const fetchData = async () => {
+    try {
+      let response = await axios.get(`${BACKEND_ENDPOINT}/lost_and_found/get_all`);
+      setLostItem(response.data);
+    } catch (error) {
+      console.error(error);
     }
+  }
 
-    const fetchData = async () => {
-        try {
-            let response = await axios.get(`${BACKEND_ENDPOINT}/lost_and_found/get_all`);
-            setLostItem(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        fetchData();
+  useEffect(() => {
+    fetchData();
 
 
-        const interval = setInterval(() => {
-            fetchData();
-        }, 30000);
+    const interval = setInterval(() => {
+      fetchData();
+    }, 30000);
 
-        // Clear interval on component unmount
-        return () => clearInterval(interval);
+    // Clear interval on component unmount
+    return () => clearInterval(interval);
 
-    }, [])
+  }, [])
 
 
 
-    return (
-        <AppBackground>
-            <AppContainer>
-                <Main>
-                    <BackIcon onClick={() => navigate(-1)}
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                        alt="Back icon"
-                    />
-                    <ProfileHeader>
-                        <ProfileImage
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/ab67d02a8b8ad216eae4c696c2a0e629a71d161cc2bc274895d9505e7b4ec172?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                            alt="Profile"
-                        />
-                        <ProfileName>Lost and Found</ProfileName>
-                        <SettingsIcon onClick={handleClick}
-                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/4c694fe63eee666fe1ae7b582df3d2174962135b8c9920c689ab652682988add?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                            alt="Add New found item"
-                        />
-                    </ProfileHeader>
-                    {lostItem && lostItem.map((item) => (
-                        <Card>
-                            <DateTime>
-                                {formatDatestamp(item.date)},{formatTimestamp(item.time)}
-                            </DateTime>
-                            <Sadgun>
-                                {item.description}
-                            </Sadgun>
-                            <Name>
-                                by:  {item.by.name}
-                            </Name>
-                        </Card>
-                    ))}
+  return (
+    <AppBackground>
+      <AppContainer>
+        <Main>
+          <BackIcon onClick={() => navigate(-1)}
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+            alt="Back icon"
+          />
+          <ProfileHeader>
+            <ProfileImage
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/ab67d02a8b8ad216eae4c696c2a0e629a71d161cc2bc274895d9505e7b4ec172?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+              alt="Profile"
+            />
+            <ProfileName>Lost and Found</ProfileName>
+            <SettingsIcon onClick={handleClick}
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/4c694fe63eee666fe1ae7b582df3d2174962135b8c9920c689ab652682988add?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+              alt="Add New found item"
+            />
+          </ProfileHeader>
+          {Array.isArray(lostItem) && lostItem.map((item) => (
+            <Card>
+              <DateTime>
+                {formatDatestamp(item.date)},{formatTimestamp(item.time)}
+              </DateTime>
+              <Sadgun>
+                {item.description}
+              </Sadgun>
+              <Name>
+                by:  {item.by.name}
+              </Name>
+            </Card>
+          ))}
 
 
-                </Main>
-            </AppContainer>
-        </AppBackground>
-    );
+        </Main>
+      </AppContainer>
+    </AppBackground>
+  );
 }
 
 const AppBackground = styled.div`
   background: linear-gradient(180deg, #ffffff 0%, #e2c2ff 100%);
+  min-height: 100vh;
   height: 100%; // Ensure it covers the full viewport height
 `;
 const AppContainer = styled.div`

@@ -62,7 +62,7 @@ export function UserProfile() {
     navigate("/"); // Assuming your login route is the root
   };
 
-  console.log(user, "<< user");
+  // console.log(user, "<<----- user");
   useEffect(() => {
     const fetchUserDetails = async () => {
       setLoading(true);
@@ -86,7 +86,7 @@ export function UserProfile() {
     };
 
     fetchUserDetails();
-  }, [authUser.id]); // Depend on user ID
+  }, []); // Depend on user ID
   return (
     <>
       <Div

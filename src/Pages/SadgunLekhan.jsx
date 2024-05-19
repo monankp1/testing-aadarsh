@@ -5,30 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BACKEND_ENDPOINT } from "../api/api";
+import { createContext } from "react";
 
-// const blogPosts = [
-//   {
-//     id: 1,
-//     date: "May 29, 2024, 12:42 PM",
-//     title: "Mandir, one of the base pillars of Hindu culture",
-//     excerpt:
-//       "The Mandir, or Hindu temple, stands as one of the foundational pillars of Hindu culture, serving as a sacred space where devotees connect with the divine, partake in rituals, and uphold their religious heritage. Rooted in centuries of tradition, these architectural marvels hold not only spiritual significance but also cultural and historical importance. The Mandir is a testament to the profound and diverse aspects of Hinduism, encompassing devotion, art, architecture, and communal identity.",
-//   },
-//   {
-//     id: 2,
-//     date: "May 29, 2024, 12:42 PM",
-//     title: "My first shibir yatra towards history of BAPS mandirs",
-//     excerpt:
-//       "The spiritual journey undertaken by devotees of the BAPS Swaminarayan Mandir from Rajkot to various locations, including Bochaasan, Navasari, Nasik, Pune, and Chansad, holds profound significance in their spiritual growth and connection with their faith. This journey encompasses not only physical travel but also a deep internal exploration of one's beliefs, values, and relationship with the divine.",
-//   },
-//   {
-//     id: 3,
-//     date: "May 29, 2024, 12:42 PM",
-//     title: "Why mandir is a must in society?",
-//     excerpt:
-//       "The journey typically involves a series of stops at various Swaminarayan temples and centers, where devotees engage in shibir sessions and spiritual discourses. These sessions are guided by spiritual leaders and scholars, offering profound insights into the teachings of Swaminarayan Bhagwan and the principles of the BAPS organization. Participants are encouraged to reflect on their lives, cultivate inner virtues, and strengthen their bond with God.",
-//   },
-// ];
+export const DataContext = createContext(0);
+
 
 const formatDatestamp = (dateString) => {
   const notificationDate = new Date(dateString);
@@ -58,6 +38,7 @@ const formatTimestamp = (timeString) => {
 
 function SadgunLekhan() {
   const [sadguns, setSadguns] = useState([]);
+  const [sadgunCount, setSadgunCount] = useState(1);
   const navigate = useNavigate(); // Hook to handle navigation
 
   const handleClick = () => {
@@ -107,7 +88,7 @@ function SadgunLekhan() {
               alt="Add New Sadgun"
             />
           </ProfileHeader>
-          {sadguns && sadguns.map((item) => (
+          {Array.isArray(sadguns) && sadguns.map((item) => (
             <Card>
               <DateTime>
                 {formatDatestamp(item.date)},{formatTimestamp(item.time)}
@@ -130,7 +111,9 @@ function SadgunLekhan() {
 
 const AppBackground = styled.div`
   background: linear-gradient(180deg, #ffffff 0%, #e2c2ff 100%);
+  min-height: 100vh;
   height: 100%; // Ensure it covers the full viewport height
+
 `;
 const AppContainer = styled.div`
   border-radius: 30px;

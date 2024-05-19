@@ -77,7 +77,7 @@ function Notifications() {
                 <HeadingText>Shibir Updates</HeadingText>
             </Heading>
 
-            {notifications && notifications.map((item, idx) => {
+            {Array.isArray(notifications) && notifications.map((item, idx) => {
                 return (
                     <Card key={idx}>
                         <CardHeader>
@@ -120,6 +120,7 @@ const HeadingText = styled.h1`
 `
 const Page = styled.div`
     width: 100%;
+    min-height: 100vh;
     height: 100%;
     flex-shrink: 0;
     background: var(--Light-Pink-Gradient, linear-gradient(168deg, #FFF 0%, #E2C2FF 70.31%));

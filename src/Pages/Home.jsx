@@ -14,7 +14,7 @@ import ShibirRoute from "../components/ShibirRoute";
 // import AnnouncementCard from "../components/Announcement";
 import Notification from "../components/Notification";
 import MemoriesSection from "../components/Memories";
-import QuizeStarter from "../components/QuizStarter";
+import QuizStarter from "../components/QuizStarter";
 // import QRScanner from "../components/QRScanner";
 
 const Home = () => {
@@ -61,7 +61,6 @@ const Home = () => {
         {/* Main Content */}
         <ShibirRoute />
         <MemoriesSection />
-        <QuizeStarter />
         {/* ... your QR scanner code here */}
         <BottomNavigation
           sx={{

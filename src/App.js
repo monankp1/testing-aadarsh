@@ -23,6 +23,7 @@ import Score from "./Pages/Score";
 import LostAndFound from "./Pages/LostAndFound";
 import AddFoundItem from "./Pages/AddFoundItem";
 
+import PlayActivity from "./Pages/playActivity";
 function App() {
   return (
     <Router>
@@ -156,6 +157,14 @@ function App() {
             }
           />
 
+          <Route
+            path="/play-activity"
+            element={
+              <PrivateRoute>
+                <PlayActivity />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </AuthProvider>
     </Router>

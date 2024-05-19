@@ -46,7 +46,7 @@ function Notification() {
     const intervalId = setInterval(() => {
       const currentTime = Date.now();
       // Check if 30 seconds has passed since the last fetch
-      if (lastFetchTimestamp && currentTime - lastFetchTimestamp >= 30000) {
+      if (lastFetchTimestamp && currentTime - lastFetchTimestamp >= 10000) {
         fetchNotifications();
       }
     }, 1000); // Check every second for timeout
@@ -116,7 +116,7 @@ function Notification() {
       {latestNotification &&
         (<Card>
           <CardHeader>
-            <SenderName>{latestNotification.by.name}</SenderName>
+            <SenderName>{latestNotification.by?.name}</SenderName>
             <Datestamp>{formatDatestamp(latestNotification.date)} at {formatTimestamp(latestNotification.time)}</Datestamp>
           </CardHeader>
           <Message>
@@ -140,7 +140,7 @@ function Notification() {
           <CloseButton onClick={handleCloseDetailedAnnouncement}>X</CloseButton>
           <DetailedAnnouncement>
             <CardHeader>
-              <SenderName>{latestNotification.by.name}</SenderName>
+              <SenderName>{latestNotification.by?.name}</SenderName>
               <Datestamp>{formatDatestamp(latestNotification.date)} at {formatTimestamp(latestNotification.time)}</Datestamp>
             </CardHeader>
             <br />

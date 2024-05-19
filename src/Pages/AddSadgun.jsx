@@ -8,77 +8,78 @@ import { ToastContainer, toast } from "react-toastify"
 
 
 function AddSadgun() {
-    const [sadgun, setSadgun] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const reference = useRef();
-    const navigate = useNavigate();
+  const [sadgun, setSadgun] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const reference = useRef();
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setSadgun(e.target.value);
+  const handleChange = (e) => {
+    setSadgun(e.target.value);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (sadgun.length < 100) {
+      toast.warning('Write minimum 100 characters to save.');
+      return;
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
 
-        if (sadgun.length < 100) {
-            toast.warning('Write minimum 100 characters to save.');
-            return;
-        }
+    const user = JSON.parse(localStorage.getItem('user'));
+    const id = user?.id;
+    console.log("id", id)
+    const data = {
+      shibir_id: id,
+      sadgun: sadgun
+    };
 
+    axios.post(`${BACKEND_ENDPOINT}/sadgun/post_sadgun`, data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        console.log('Success:', response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
 
-        const user = JSON.parse(localStorage.getItem('user'));
-        const id = user?.id;
-        console.log("id", id)
-        const data = {
-            shibir_id: id,
-            sadgun: sadgun
-        };
+    navigate(-1);
 
-        axios.post(`${BACKEND_ENDPOINT}/sadgun/post_sadgun`, data, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => {
-                console.log('Success:', response.data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+  }
 
-        navigate(-1);
-    }
+  useEffect(() => {
+    reference.current.focus();
+  }, [])
 
-    useEffect(() => {
-        reference.current.focus();
-    }, [])
+  return (
+    <AppBackground>
+      <Header>
+        <BackIcon onClick={() => navigate(-1)}
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+          alt="Back icon"
+        />
+        <SaveButton type='submit' form="sadgunForm">Save</SaveButton>
+      </Header>
+      <form id="sadgunForm" onSubmit={handleSubmit}>
 
-    return (
-        <AppBackground>
-            <Header>
-                <BackIcon onClick={() => navigate(-1)}
-                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                    alt="Back icon"
-                />
-                <SaveButton type='submit' form="sadgunForm">Save</SaveButton>
-            </Header>
-            <form id="sadgunForm" onSubmit={handleSubmit}>
+        <InputBox>
+          <StyledInput
+            type='text'
+            ref={reference}
+            value={sadgun}
+            onChange={handleChange}
+            required
+            placeholder='Type the sadgun here (minimum 100 Characters required)'
+          />
+        </InputBox>
+      </form>
+      <ToastContainer position="top-center" autoClose={5000} />
 
-                <InputBox>
-                    <StyledInput
-                        type='text'
-                        ref={reference}
-                        value={sadgun}
-                        onChange={handleChange}
-                        required
-                        placeholder='Type the sadgun here (minimum 100 Characters required)'
-                    />
-                </InputBox>
-            </form>
-            <ToastContainer position="top-center" autoClose={5000} />
-
-        </AppBackground>
-    )
+    </AppBackground>
+  )
 }
 
 const AppBackground = styled.div`

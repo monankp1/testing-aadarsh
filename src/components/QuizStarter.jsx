@@ -25,15 +25,18 @@ function QuizStarter() {
   const handleIcon = () => {
     navigate("/score"); // Navigate to the ImageDetails component page
   };
+  const handleQuiz = () => {
+    navigate("/play-activity"); // Navigate to the ImageDetails component page
+  };
   return (
     <>
       <MemoriesHeader>
-        <MemoriesIcon
+        {/* <MemoriesIcon
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/48e32c756171dfd83384040b5add7bdfba0735f59c6cb31f5a40dc08aa7053da?apiKey=3250d16d0ad044539de68d3e33600ce8&"
           alt="Memories Icon"
-        />
-        <MemoriesTitle>Activity Zone</MemoriesTitle>
-        <MemoriesLink onClick={handleIcon}>View All</MemoriesLink>
+        /> */}
+        <MemoriesTitle>Quiz Zone</MemoriesTitle>
+        {/* <MemoriesLink onClick={handleIcon}>View All</MemoriesLink> */}
       </MemoriesHeader>
       <Container>
         {data.map((item, index) => (
@@ -47,11 +50,10 @@ function QuizStarter() {
             </CardContent>
             <PlayButton>
               <PlayButtonContent>
-                <PlayButtonText>Let's Play</PlayButtonText>
-                <PlayButtonIcon
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/1e111c01156d69c0b43141f98cd94c78af9b7751707d40876e3fe8976ba8226e?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                  alt="Play icon"
-                />
+                <PlayButtonText onClick={handleQuiz}>
+                  Start the Quiz
+                </PlayButtonText>
+
               </PlayButtonContent>
             </PlayButton>
             <CardFooter>
@@ -140,11 +142,7 @@ const PlayButtonText = styled.span`
   font-size: 16px;
 `;
 
-const PlayButtonIcon = styled.img`
-  width: 18px;
-  aspect-ratio: 1;
-  object-fit: cover;
-`;
+
 
 const CardFooter = styled.p`
   font-weight: 400;
