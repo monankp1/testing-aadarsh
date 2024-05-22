@@ -20,9 +20,9 @@ export function UserProfile() {
   const { logout, user: authUser } = useAuth(); // Get the logged-in user's details if needed for authentication
   const [showScanner, setShowScanner] = useState(false);
 
-  const handleToggleScanner = () => {
-    setShowScanner(!showScanner); // Toggle the visibility of the scanner
-  };
+  // const handleToggleScanner = () => {
+  //   setShowScanner(!showScanner); // Toggle the visibility of the scanner
+  // };
   const handleScan = async (data) => {
     if (data) {
       console.log(data.text, "<<<<-data.text");
@@ -75,6 +75,7 @@ export function UserProfile() {
         console.log(response, "<--response");
         if (response.data.status === "true") {
           setUser(response.data.user);
+          console.log(response.data);
         } else {
           throw new Error("Failed to fetch user details");
         }
@@ -87,6 +88,22 @@ export function UserProfile() {
 
     fetchUserDetails();
   }, []); // Depend on user ID
+
+  const handleMandalAttandance = () => {
+    navigate('/mandal-details')
+  };
+
+  const handleBusDetails = () => {
+    navigate("/bus-details");
+  };
+
+  const handleAdmin = () => {
+    navigate('/admin-details')
+  };
+
+  const access = JSON.parse(localStorage.getItem('user'));
+
+
   return (
     <>
       <Div
@@ -95,9 +112,10 @@ export function UserProfile() {
         }}
       >
         <TopBar>
-          <IconButton onClick={() => navigate(-1)}>
-            <ArrowBackIosNewIcon />
-          </IconButton>
+          <BackIcon onClick={() => navigate('/home')}
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+            alt="Back icon"
+          />
           <IconButton onClick={handleLogout}>
             <LogoutIcon />
           </IconButton>
@@ -107,12 +125,9 @@ export function UserProfile() {
           <div className=" loading">Loading...</div>
         ) : (
           <>
-            <IconButton onClick={handleToggleScanner}>
-              {showScanner ? "" : "Open Scanner"}{" "}
-              {/* Display appropriate text based on state */}
-            </IconButton>
 
-            {showScanner && (
+
+            {user?.permission.edit_mandal_attendance == "yes" && (
               <QRScanner
                 handleScan={handleScan}
                 handleError={handleError}
@@ -123,7 +138,7 @@ export function UserProfile() {
               <Div5>
                 <Img2
                   loading="lazy"
-                  src="http://api.qrserver.com/v1/create-qr-code/?color=112844&bgcolor=ffffff&data=YK0003%20Tarang%20K.%20Patel&qzone=1&margin=0&size=400x400&ecc=L"
+                  src={user?.qr_code}
                 />
                 <Div6>{user?.shibir_id}</Div6>
               </Div5>
@@ -137,9 +152,11 @@ export function UserProfile() {
                     <br />
                     <span
                       style={{
-                        "font-size": "20px",
-                        "line-height": "20px",
-                        color: "rgba(29,15,42,1)",
+                        color: '#270025',
+                        fontSize: '20px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        lineHeight: '100.8%'
                       }}
                     >
                       {user?.name}
@@ -150,41 +167,60 @@ export function UserProfile() {
                     <br />
                     <span
                       style={{
-                        "font-size": "20px",
-                        "line-height": "20px",
-                        color: "rgba(29,15,42,1)",
+                        color: '#270025',
+                        fontSize: '20px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        lineHeight: '100.8%'
                       }}
                     >
                       {user?.mandal}
                     </span>
+                    {user?.permission.view_mandal_attendance == "yes" && <button
+                      onClick={handleMandalAttandance}
+                      style={{
+                        marginLeft: '3rem', display: "inline-flex",
+                        padding: "0px 5.659px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8.488px",
+                        color: "white",
+                        borderRadius: "7.073px",
+                        border: "0.5px solid var(--Title, #FFF)",
+                        background: "var(--BG-Gredient, linear-gradient(180deg, #270025 0%, #1D0F2A 100%))"
+                      }}> View details</button>}
                   </Div11>
                   <Div12>
                     <span style={{ "font-size": "12px" }}>Mobile No.</span>
                     <br />
                     <span
                       style={{
-                        "font-size": "20px",
-                        "line-height": "20px",
-                        color: "rgba(29,15,42,1)",
+                        color: '#270025',
+                        fontSize: '20px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        lineHeight: '100.8%'
                       }}
                     >
                       {user?.phone_number}
                     </span>
                   </Div12>
                   <Div13>
-                    <span style={{ "font-size": "20px" }}>
+                    <span style={{ "font-size": "12px" }}>
                       Emergency Contact No.
                     </span>
 
                     <br />
                     <span
                       style={{
-                        "font-size": "20px",
-                        "line-height": "20px",
-                        color: "rgba(29,15,42,1)",
+                        color: '#270025',
+                        fontSize: '20px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        lineHeight: '100.8%'
                       }}
                     >
-                      {user?.Emergency_number}
+                      {user?.emergency_number}
                     </span>
                   </Div13>
                 </Div9>
@@ -197,44 +233,83 @@ export function UserProfile() {
                         <span style={{ "font-size": "18px" }}>
                           Bus No. / Seat No.
                         </span>
+                        {user?.permission.view_bus_details == "yes" &&
+                          <button
+                            onClick={handleBusDetails}
+                            style={{
+                              marginLeft: '3rem', display: "inline-flex",
+                              padding: "0px 5.659px",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              gap: "8.488px",
+                              color: "white",
+                              borderRadius: "7.073px",
+                              border: "0.5px solid var(--Title, #FFF)",
+                              background: "var(--BG-Gredient, linear-gradient(180deg, #270025 0%, #1D0F2A 100%))"
+                            }}>
+                            View details
+                          </button>}
                         <br />
                         <span
                           style={{
-                            "font-size": "20px",
-                            "line-height": "20px",
-                            color: "rgba(39,15,42,1)",
+                            color: '#270025',
+                            fontSize: '20px',
+                            fontStyle: 'normal',
+                            fontWeight: 700,
+                            lineHeight: '100.8%'
                           }}
                         >
-                          GJ 16 KD 2256 (SN. 05)
+                          {user?.bus_detail}
                         </span>
                       </Div18>
                       <Div19>
-                        <span style={{ "font-size": "18px" }}>Bus Leader</span>
+                        <span style={{ "font-size": "18px" }}>Bus Leader 1</span>
                         <br />
                         <span
                           style={{
-                            "font-size": "20px",
-                            "line-height": "20px",
-                            color: "rgba(39,15,42,1)",
+                            color: '#270025',
+                            fontSize: '20px',
+                            fontStyle: 'normal',
+                            fontWeight: 700,
+                            lineHeight: '100.8%'
                           }}
                         >
-                          Rutvik A. Patel
+                          {user?.bus_leader_1}
                         </span>
                         <br />
                         <span style={{ "font-size": "20px" }}>
-                          Mo. 89658 95645
+                          Mo. {user?.bus_leader_1_no}
+                        </span>
+                      </Div19>
+                      <Div19>
+                        <span style={{ "font-size": "18px" }}>Bus Leader 2</span>
+                        <br />
+                        <span
+                          style={{
+                            color: '#270025',
+                            fontSize: '20px',
+                            fontStyle: 'normal',
+                            fontWeight: 700,
+                            lineHeight: '100.8%'
+                          }}
+                        >
+                          {user?.bus_leader_2}
+                        </span>
+                        <br />
+                        <span style={{ "font-size": "20px" }}>
+                          Mo. {user?.bus_leader_2_no}
                         </span>
                       </Div19>
                     </Div17>
-                    <Div20>
+                    {/* <Div20>
                       <Img3
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/dab3fe720cafe3f45cd87ea8087c9f1299946422feccd4f79687519a32f33f8f?apiKey=3250d16d0ad044539de68d3e33600ce8&"
                       />
                       <Div21>Call</Div21>
-                    </Div20>
+                    </Div20> */}
                   </Div16>
-
+                  <hr />
                   <Div22>
                     <span style={{ "font-size": "20px" }}>
                       Nashik Utara Details
@@ -242,23 +317,17 @@ export function UserProfile() {
                     <br />
                     <span
                       style={{
-                        "font-size": "20px",
-                        "line-height": "20px",
-                        color: "rgba(39,15,42,1)",
+                        color: '#270025',
+                        fontSize: '20px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        lineHeight: '100.8%'
                       }}
                     >
-                      Room No. 229
+                      {user?.nasik_utara}
                     </span>
                     <br />
-                    <span
-                      style={{
-                        "font-size": "20px",
-                        "line-height": "20px",
-                        color: "rgba(39,15,42,1)",
-                      }}
-                    >
-                      Yogi Sadan, 2nd Floor
-                    </span>
+
                   </Div22>
                   <Div23>
                     <span style={{ "font-size": "20px" }}>
@@ -267,26 +336,52 @@ export function UserProfile() {
                     <br />
                     <span
                       style={{
-                        "font-size": "20px",
-                        "line-height": "20px",
-                        color: "rgba(39,15,42,1)",
+                        color: '#270025',
+                        fontSize: '20px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        lineHeight: '100.8%'
                       }}
                     >
-                      Room No. 122
+                      {user?.pune_utara}
+                    </span>
+                    <br />
+
+                  </Div23>
+                  <Div23>
+                    <span style={{ "font-size": "20px" }}>
+                      Tithal Utara Details
                     </span>
                     <br />
                     <span
                       style={{
-                        "font-size": "20px",
-                        "line-height": "20px",
-                        color: "rgba(39,15,42,1)",
+                        color: '#270025',
+                        fontSize: '20px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        lineHeight: '100.8%'
                       }}
                     >
-                      Pramukh Bhavan, 1st Floor
+                      {user?.tithal_utara}
                     </span>
+                    <br />
+
                   </Div23>
                 </Div15>
               </Div14>
+              {['BHYK218', 'BHYK345', 'BHYK155', 'BHYK254', 'BHYK163', 'BHYK167', 'AKYK027', 'AKYK021'].includes(access.id) && <button
+                style={{
+                  display: 'flex',
+                  padding: '8px 10px',
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
+                  gap: '8px',
+                  marginTop: '5px',
+                  color: 'black',
+                  fontWeight: '700',
+                  borderRadius: '8px',
+                  background: 'linear-gradient(180deg, #C86FFF 0%, #BFA1FF 100%)'
+                }} onClick={handleAdmin}>Admin</button>}
               <Diva>
                 <Diva2>
                   <Diva3>Emergency Helpline No.</Diva3>
@@ -312,12 +407,23 @@ export function UserProfile() {
             </Div7>
           </>
         )}
-      </Div>
+      </Div >
 
       <BottomNavigationBar />
     </>
   );
 }
+
+const BackIcon = styled.img`
+    width: 13px;
+    aspect-ratio: 0.65;
+    object-fit: auto;
+    cursor: pointer;
+    position: relative;
+    bottom: 5px;
+    left: 5px;
+`;
+
 const Div = styled.div`
   justify-content: center;
   align-content: flex-start;

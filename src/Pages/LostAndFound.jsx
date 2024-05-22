@@ -1,287 +1,181 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { BACKEND_ENDPOINT } from "../api/api";
-
+import { BottomNavigationBar } from "../components/BottomNavigationBar";
 
 const formatDatestamp = (dateString) => {
   const notificationDate = new Date(dateString);
   const today = new Date();
 
-  // Check if the notification date is today
   if (notificationDate.toDateString() === today.toDateString()) {
-    // If it's today, return 'Today'
     return 'Today';
   } else {
-    // If it's not today, format the date as "3rd May, 2024"
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const formattedDate = notificationDate.toLocaleDateString('en-US', options);
-    return formattedDate;
+    return notificationDate.toLocaleDateString('en-US', options);
   }
-}
+};
 
 const formatTimestamp = (timeString) => {
-  const [hours, minutes, seconds] = timeString.split(':');
+  const [hours, minutes] = timeString.split(':');
   let formattedHours = parseInt(hours);
   const ampm = formattedHours >= 12 ? 'PM' : 'AM';
   formattedHours = formattedHours % 12 || 12;
-  const formattedTime = `${formattedHours}:${minutes} ${ampm}`;
-  return formattedTime;
-}
-
+  return `${formattedHours}:${minutes} ${ampm}`;
+};
 
 function LostAndFound() {
-  const [lostItem, setLostItem] = useState([]);
-  const navigate = useNavigate(); // Hook to handle navigation
+  const [lostItems, setLostItems] = useState([]);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     navigate("/add-foundItem");
-  }
+  };
 
   const fetchData = async () => {
     try {
       let response = await axios.get(`${BACKEND_ENDPOINT}/lost_and_found/get_all`);
-      setLostItem(response.data);
+      setLostItems(response.data);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchData();
-
 
     const interval = setInterval(() => {
       fetchData();
     }, 30000);
 
-    // Clear interval on component unmount
     return () => clearInterval(interval);
-
-  }, [])
-
-
+  }, []);
 
   return (
-    <AppBackground>
-      <AppContainer>
-        <Main>
-          <BackIcon onClick={() => navigate(-1)}
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-            alt="Back icon"
-          />
-          <ProfileHeader>
-            <ProfileImage
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/ab67d02a8b8ad216eae4c696c2a0e629a71d161cc2bc274895d9505e7b4ec172?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-              alt="Profile"
-            />
-            <ProfileName>Lost and Found</ProfileName>
-            <SettingsIcon onClick={handleClick}
+    <Container>
+      <Header>
+        <BackButton
+          onClick={() => navigate('/home')}
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+          alt="Back icon"
+        />
+        <Profile>
+          <ProfileImage src="https://cdn.builder.io/api/v1/image/assets/TEMP/ab67d02a8b8ad216eae4c696c2a0e629a71d161cc2bc274895d9505e7b4ec172?apiKey=3250d16d0ad044539de68d3e33600ce8&" alt="Profile" />
+          <ProfileName>Lost and Found
+            <AddButton
+              onClick={handleClick}
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/4c694fe63eee666fe1ae7b582df3d2174962135b8c9920c689ab652682988add?apiKey=3250d16d0ad044539de68d3e33600ce8&"
               alt="Add New found item"
-            />
-          </ProfileHeader>
-          {Array.isArray(lostItem) && lostItem.map((item) => (
-            <Card>
-              <DateTime>
-                {formatDatestamp(item.date)},{formatTimestamp(item.time)}
-              </DateTime>
-              <Sadgun>
-                {item.description}
-              </Sadgun>
-              <Name>
-                by:  {item.by.name}
-              </Name>
-            </Card>
-          ))}
+            /></ProfileName>
 
-
-        </Main>
-      </AppContainer>
-    </AppBackground>
+        </Profile>
+      </Header>
+      <Content>
+        {Array.isArray(lostItems) && lostItems.map((item, index) => (
+          <Card key={index}>
+            <DateTime>
+              {formatDatestamp(item.date)}, {formatTimestamp(item.time)}
+            </DateTime>
+            <Description>
+              {item.description}
+            </Description>
+            <Author>
+              by: {item.by.name}
+            </Author>
+          </Card>
+        ))}
+      </Content>
+      <BottomNavigationBar />
+    </Container>
   );
 }
 
-const AppBackground = styled.div`
-  background: linear-gradient(180deg, #ffffff 0%, #e2c2ff 100%);
+const Container = styled.div`
   min-height: 100vh;
-  height: 100%; // Ensure it covers the full viewport height
-`;
-const AppContainer = styled.div`
-  border-radius: 30px;
-  max-width: 480px;
-  width: 100%;
-  margin: 0 auto;
-  overflow: hidden; // Add this to contain the border radius effect
-  font-family: "Arial", sans-serif;
-  color: #1d0f2a;
+  background: linear-gradient(180deg, #ffffff 0%, #e2c2ff 100%);
+  display: flex;
+  flex-direction: column;
+  position: relative;
 `;
 
-const Main = styled.main`
-  padding: 0 16px;
-  margin-top: 17px;
+const Header = styled.header`
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  margin-top: 2rem;
 `;
 
-const BackIcon = styled.img`
+const BackButton = styled.img`
   width: 13px;
   aspect-ratio: 0.65;
   object-fit: auto;
-  fill: var(--BG-Gredient, linear-gradient(180deg, #270025 0%, #1d0f2a 100%));
-  margin-left: 10px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
 `;
 
-const ProfileHeader = styled.div`
-  border-radius: 10px;
-  background-color: var(--Title, #fff);
-  color: var(--BG-Purple, #1d0f2a);
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 40%;
-  padding: 5px 10px;
-  margin-top: 24px;
+const Profile = styled.div`
   display: flex;
-  gap: 8px;
+  align-items: center;
+  width: 100%;
 `;
 
 const ProfileImage = styled.img`
   width: 25px;
   aspect-ratio: 0.96;
   object-fit: auto;
+  margin-right: 8px;
 `;
 
 const ProfileName = styled.div`
-  font-family: Arial, sans-serif;
-  margin: auto 0;
+  font-weight: bold;
+  font-size: 20px;
+  flex-grow: 1;
 `;
 
-const SettingsIcon = styled.img`
+const AddButton = styled.img`
   width: 26px;
   aspect-ratio: 1;
   object-fit: auto;
+  position: relative;
+  left: 5px;
+  bottom: 2px;
+`;
+
+const Content = styled.main`
+  flex: 1;
+  padding: 0 24px;
+  overflow-y: auto;
 `;
 
 const Card = styled.article`
   border-radius: 16px;
-  border: 0.5px  var(--new-stroke-gradient, #1d0f2a);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  background: var(
-    --light-pink-gradient,
-    linear-gradient(168deg, #fff 0%, #e2c2ff 70.31%)
-  );
-  display: flex;
-  flex-direction: column;
+  border: 0px solid #1d0f2a;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(168deg, #fff 0%, #e2c2ff 70.31%);
   margin-top: 10px;
   padding: 24px;
-  width: 100%;
-  
 `;
 
 const DateTime = styled.div`
-color: rgba(39, 0, 37, 0.50);
-
-font-family: Overlock;
-font-size: 1rem;
-font-style: normal;
-font-weight: 700;
-line-height: 136%; /* 16.32px */
+  color: rgba(39, 0, 37, 0.50);
+  font-weight: bold;
+  font-size: 1rem;
 `;
 
-const Sadgun = styled.p`
+const Description = styled.p`
   margin-top: 16px;
   overflow: hidden;
   color: rgba(39, 0, 37, 0.50);
-
   text-align: justify;
-  font-family: Overlock;
+  font-weight: bold;
   font-size: 1rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 136%;
 `;
 
-const Name = styled.div`
+const Author = styled.div`
   color: black;
+  margin-top: 8px;
 `;
-
-const PostDate = styled.div`
-  font-family: Overlock, sans-serif;
-  padding: 2px 0;
-`;
-
-const CalendarIcon = styled.img`
-  width: 21px;
-  aspect-ratio: 4.17;
-  object-fit: auto;
-  fill: var(--BG-Gredient, linear-gradient(180deg, #270025 0%, #1d0f2a 100%));
-  margin: auto 0;
-`;
-
-const ReadMoreText = styled.div`
-  font-family: Poppins, sans-serif;
-  background: linear-gradient(
-    180deg,
-    rgba(39, 0, 37, 0.5) 0%,
-    rgba(29, 15, 42, 0.5) 100%
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  flex: 1;
-`;
-
-const ArrowIcon = styled.img`
-  width: 16px;
-  aspect-ratio: 1;
-  object-fit: auto;
-`;
-
-const BlogPostList = styled.div`
-  background: linear-gradient(180deg, #ffffff 0%, #e2c2ff 100%);
-  border-radius: 25px;
-  padding: 20px;
-  /* Rest of the styles */
-`;
-
-// ... other styled components
-
-const PostHeader = styled.div`
-  /* This might contain the date and possibly a calendar icon */
-  display: flex;
-  justify-content: space-between; /* Align items to the left and right */
-  color: #6f6f6f; /* A light grey for the secondary text */
-  margin-bottom: 8px; /* Space between the header and the title */
-`;
-
-const PostTitle = styled.h2`
-  color: #1d0f2a; /* Main text color for the title */
-  font-size: 16px; /* Adjust the font size as needed */
-  margin-bottom: 8px; /* Space between the title and the excerpt */
-`;
-
-const PostExcerpt = styled.p`
-  color: #6f6f6f; /* A light grey for the excerpt */
-  font-size: 14px; /* Adjust the font size as needed */
-  margin-bottom: 8px; /* Space between the excerpt and 'read more' */
-`;
-
-const ReadMore = styled.div`
-  text-align: right;
-  color: #8e44ad; /* Purple color for 'read more' */
-  font-size: 14px; /* Adjust the font size as needed */
-  display: flex
-`;
-const BlogPost = styled.article`
-  border-radius: 25px;
-  background: linear-gradient(180deg, #ffffff 0%, #e2c2ff 100%);
-  padding: 15px 26px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 16px; /* Space between posts, adjust as needed */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-`;
-
 
 export default LostAndFound;

@@ -24,6 +24,15 @@ import LostAndFound from "./Pages/LostAndFound";
 import AddFoundItem from "./Pages/AddFoundItem";
 
 import PlayActivity from "./Pages/playActivity";
+import Dhule from "./Pages/routeDetails/Dhule";
+import Ellora from "./Pages/routeDetails/Ellora";
+import BusDetails from "./Pages/detailview/BusDetails";
+import MandalDetails from "./Pages/detailview/MandalDetails";
+import AdminDetails from "./Pages/detailview/AdminDetails";
+import ActivityPage from "./Pages/ActivityPage";
+import ShibirRoutess from "./Pages/ShibirRoutess";
+
+
 function App() {
   return (
     <Router>
@@ -47,10 +56,10 @@ function App() {
             }
           />
           <Route
-            path="/shibir-route"
+            path="/shibir-routes"
             element={
               <PrivateRoute>
-                <ShibirRoute />
+                <ShibirRoutess />
               </PrivateRoute>
             }
           />
@@ -63,10 +72,10 @@ function App() {
             }
           />
           <Route
-            path="/score"
+            path="/activity-page"
             element={
               <PrivateRoute>
-                <Score />
+                <ActivityPage />
               </PrivateRoute>
             }
           />
@@ -86,6 +95,23 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/Dhule-details"
+            element={
+              <PrivateRoute>
+                <Dhule />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/Ellora-details"
+            element={
+              <PrivateRoute>
+                <Ellora />
+              </PrivateRoute>
+            }
+          />
+
           <Route
             path="/Navsari-details"
             element={
@@ -162,6 +188,31 @@ function App() {
             element={
               <PrivateRoute>
                 <PlayActivity />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/bus-details"
+            element={
+              <PrivateRoute>
+                <BusDetails />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/mandal-details"
+            element={
+              <PrivateRoute>
+                <MandalDetails />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin-details"
+            element={
+              <PrivateRoute>
+                <AdminDetails />
               </PrivateRoute>
             }
           />

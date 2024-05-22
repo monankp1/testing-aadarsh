@@ -15,6 +15,7 @@ import ShibirRoute from "../components/ShibirRoute";
 import Notification from "../components/Notification";
 import MemoriesSection from "../components/Memories";
 import QuizStarter from "../components/QuizStarter";
+import ScheduleCard from "./karyakram/Karyakram";
 // import QRScanner from "../components/QRScanner";
 
 const Home = () => {
@@ -62,6 +63,9 @@ const Home = () => {
         <ShibirRoute />
         <MemoriesSection />
         {/* ... your QR scanner code here */}
+        <br />
+        <ScheduleCard />
+
         <BottomNavigation
           sx={{
             backgroundColor: "#0c1225",
@@ -71,6 +75,7 @@ const Home = () => {
             width: "100%", // Make sure BottomNavigation spans the full width
           }}
         >
+
           <BottomNavigationBar />
         </BottomNavigation>
       </Box>

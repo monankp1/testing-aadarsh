@@ -8,7 +8,7 @@ import Map from './../../img10.jpg';
 export function Imagicaa() {
   const navigate = useNavigate();
   return (
-    <Page>
+    <>
       <BackIcon onClick={() => navigate(-1)}>
         {/* Navigate back */}
         <img
@@ -37,10 +37,14 @@ export function Imagicaa() {
 
 
 
-
+          <div>
+            <a href="https://www.dropbox.com/scl/fi/5038zuenkbygmkgu2p0wr/Theme-Park-Map-16x8-1.pdf?rlkey=5jno1o7glgdgw5e2pec3bzjli&e=1&dl=0">
+              <h1>Imagicaa's Map</h1>
+            </a>
+          </div>
         </Content>
       </MainContainer>
-    </Page>
+    </>
   );
 }
 

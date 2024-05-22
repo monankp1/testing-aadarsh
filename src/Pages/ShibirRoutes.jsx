@@ -2,19 +2,19 @@ import * as React from "react";
 import styled from "styled-components";
 import InfoIcon from "@mui/icons-material/InfoTwoTone";
 import { useNavigate } from "react-router-dom";
-import { IconButton } from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import BottomNavigation from "@mui/material/BottomNavigation";
+
 import { BottomNavigationBar } from "../components/BottomNavigationBar";
 
 const timeSlots = [
-  { time: "11:30 PM", location: "Bharuch" },
-  { time: "06:00 AM", location: "Dhule" },
-  { time: "01:00 PM", location: "Ellora" },
-  { time: "09:00 PM", location: "Nashik" },
-  { time: "09:00 AM", location: "Pune" },
-  { time: "11:30 AM", location: "Imagicaa" },
-  { time: "02:30 AM", location: "Tithal" },
-  { time: "11:30 PM", location: "Bharuch" },
+  { date: "May 28", location: "Bharuch" },
+  { date: "May 29", location: "Dhule" },
+  { date: "May 29", location: "Ellora" },
+  { date: "May 30", location: "Nashik" },
+  { date: "May 31", location: "Pune" },
+  { date: "June 1", location: "Imagicaa" },
+  { date: "June 2", location: "Tithal" },
+  { date: "June 2", location: "Bharuch" },
 ];
 
 export const ShibirRoutes = () => {
@@ -47,6 +47,14 @@ export const ShibirRoutes = () => {
         navigate("/Nashik-details");
         break;
 
+      case 'Dhule':
+        navigate("/Dhule-details");
+        break;
+
+      case 'Ellora':
+        navigate("/Ellora-details");
+        break;
+
 
       default:
         break;
@@ -55,139 +63,54 @@ export const ShibirRoutes = () => {
   };
   return (
     <>
-      <BackIcon onClick={() => navigate(-1)}>
-        {/* Navigate back */}
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/1fd569ca716b29d7f1a98071e37fd2287542114cc8243ecad11b40ab9ef936c8?apiKey=65b9bef5a9974c109a4afdb193963080&"
-          alt="Back button"
-        />
-      </BackIcon>
-      <RouteContainer>
-        <RouteIcon
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/1748993d8450ee1bcce7efb0b04e5d91974a0de7e3bf14584193c83fe6dfbbd0?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-          alt="Route Icon"
-        />
-        <RouteTitle>Shibir Yatra Route</RouteTitle>
-      </RouteContainer>
-      <TimeSlotContainer>
-        <DesktopTimeSlots>
-          {timeSlots.map((slot, index) => (
-            <TimeSlot
-              key={index}
-              time={slot.time}
-              location={slot.location}
-              handleIcon={() => handleIcon(slot.location)}
-            />
-          ))}
-        </DesktopTimeSlots>
-        <Div14 style={{ padding: "20px" }}>
-          <Div15>
-            <Div16>
-              <Div17>
-                <Div18>
-                  <span style={{ "font-size": "18px" }}>
-                    Bus No. / Seat No.
-                  </span>
-                  <br />
-                  <span
-                    style={{
-                      "font-size": "20px",
-                      "line-height": "20px",
-                      color: "rgba(39,15,42,1)",
-                    }}
-                  >
-                    GJ 16 KD 2256 (SN. 05)
-                  </span>
-                </Div18>
-                <Div19>
-                  <span style={{ "font-size": "18px" }}>Bus Leader</span>
-                  <br />
-                  <span
-                    style={{
-                      "font-size": "20px",
-                      "line-height": "20px",
-                      color: "rgba(39,15,42,1)",
-                    }}
-                  >
-                    Rutvik A. Patel
-                  </span>
-                  <br />
-                  <span style={{ "font-size": "20px" }}>Mo. 89658 95645</span>
-                </Div19>
-              </Div17>
-              <Div20>
-                <Img3
-                  loading="lazy"
-                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/dab3fe720cafe3f45cd87ea8087c9f1299946422feccd4f79687519a32f33f8f?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                />
-                <Div21>Call</Div21>
-              </Div20>
-            </Div16>
+      <Background>
+        <BackIcon onClick={() => navigate("/home")}>
+          {/* Navigate back */}
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1fd569ca716b29d7f1a98071e37fd2287542114cc8243ecad11b40ab9ef936c8?apiKey=65b9bef5a9974c109a4afdb193963080&"
+            alt="Back button"
+          />
+        </BackIcon>
+        <RouteContainer>
+          <RouteIcon
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1748993d8450ee1bcce7efb0b04e5d91974a0de7e3bf14584193c83fe6dfbbd0?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+            alt="Route Icon"
+          />
+          <RouteTitle>Shibir Yatra Route</RouteTitle>
+        </RouteContainer>
+        <TimeSlotContainer>
+          <DesktopTimeSlots>
+            {timeSlots.map((slot, index) => (
+              <TimeSlotWrapper>
+                <TimeDisplay>
+                  <span style={{ fontWeight: '700', fontSize: '1rem', color: 'var(--BG-Purple, #1D0F2A)' }}>{slot.date}</span>
+                </TimeDisplay>
+                <LocationDisplay>
+                  <LocationName>{slot.location}</LocationName>
+                  <LocationMarker onClick={() => handleIcon(slot.location)}>
+                    <InfoIcon className="icon" />
+                  </LocationMarker>
+                </LocationDisplay>
+              </TimeSlotWrapper>
+            ))}
 
-            <Div22>
-              <span style={{ "font-size": "20px" }}>Nashik Utara Details</span>
-              <br />
-              <span
-                style={{
-                  "font-size": "20px",
-                  "line-height": "20px",
-                  color: "rgba(39,15,42,1)",
-                }}
-              >
-                Room No. 229
-              </span>
-              <br />
-              <span
-                style={{
-                  "font-size": "20px",
-                  "line-height": "20px",
-                  color: "rgba(39,15,42,1)",
-                }}
-              >
-                Yogi Sadan, 2nd Floor
-              </span>
-            </Div22>
-            <Div23>
-              <span style={{ "font-size": "20px" }}>Pune Utara Details</span>
-              <br />
-              <span
-                style={{
-                  "font-size": "20px",
-                  "line-height": "20px",
-                  color: "rgba(39,15,42,1)",
-                }}
-              >
-                Room No. 122
-              </span>
-              <br />
-              <span
-                style={{
-                  "font-size": "20px",
-                  "line-height": "20px",
-                  color: "rgba(39,15,42,1)",
-                }}
-              >
-                Pramukh Bhavan, 1st Floor
-              </span>
-            </Div23>
-          </Div15>
-        </Div14>
-      </TimeSlotContainer>
+          </DesktopTimeSlots>
+        </TimeSlotContainer>
+        <BottomNavigationBar />
+
+      </Background>
     </>
   );
 };
 
-const TimeSlot = ({ time, location, handleIcon }) => (
-  <TimeSlotWrapper>
-    <TimeDisplay>{time}</TimeDisplay>
-    <LocationDisplay>
-      <LocationName>{location}</LocationName>
-      <LocationMarker onClick={handleIcon}>
-        <InfoIcon className="icon" />
-      </LocationMarker>
-    </LocationDisplay>
-  </TimeSlotWrapper>
-);
+
+
+const Background = styled.div`
+  background: linear-gradient(180deg, #ffffff 0%, #e2c2ff 100%);
+  min-height: 100vh;
+  height: 100%;
+
+`;
 
 const TimeSlotContainer = styled.div`
   display: flex;
@@ -203,10 +126,11 @@ const DesktopTimeSlots = styled.div`
 
 const TimeSlotWrapper = styled.div`
   margin: 6px;
-
+  border-radius: 24px 24px 0px 0px;
   display: flex;
   width: 100px;
   flex-direction: column;
+  background: var(--Title, #FFF);
   box-shadow: 0px 3px 4px rgba(39, 0, 37, 0.25);
 `;
 const BackIcon = styled.div`
@@ -220,8 +144,8 @@ const BackIcon = styled.div`
 const TimeDisplay = styled.div`
   padding: 16px;
 
-  border-radius: 24px 24px 0 0;
-  background-color: var(--New-Light-Dark, #c394ff);
+  border-radius: 24px 24px 0px 0px;
+  background: var(--again-new-gradient, linear-gradient(180deg, #C86FFF 0%, #BFA1FF 100%));
   color: rgba(39, 0, 37, 0.5);
   font: 300 12px/67% Rubik, sans-serif;
   text-align: center;

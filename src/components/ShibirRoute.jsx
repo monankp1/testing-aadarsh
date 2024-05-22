@@ -4,14 +4,14 @@ import styled from "styled-components";
 import InfoIcon from "@mui/icons-material/InfoTwoTone";
 import { useNavigate } from "react-router-dom";
 const timeSlots = [
-  { time: "Schedule", location: "Bharuch" },
-  { time: "Schedule", location: "Dhule" },
-  { time: "Schedule", location: "Ellora" },
-  { time: "09:00 PM", location: "Nashik" },
-  { time: "09:00 AM", location: "Pune" },
-  { time: "11:30 AM", location: "Imagicaa" },
-  { time: "02:30 AM", location: "Tithal" },
-  { time: "11:30 PM", location: "Bharuch" },
+  { date: "May 28", location: "Bharuch" },
+  { date: "May 29", location: "Dhule" },
+  { date: "May 29", location: "Ellora" },
+  { date: "May 30", location: "Nashik" },
+  { date: "May 31", location: "Pune" },
+  { date: "June 1", location: "Imagicaa" },
+  { date: "June 2", location: "Tithal" },
+  { date: "June 2", location: "Bharuch" },
 ];
 
 
@@ -20,7 +20,7 @@ export function ShibirRoute() {
 
   // Handler to navigate to the details page
   const handleIcon = () => {
-    navigate("/shibir-route"); // Navigate to the ImageDetails component page
+    navigate("/shibir-routes"); // Navigate to the ImageDetails component page
   };
 
   const handleClick = (location) => {
@@ -49,6 +49,14 @@ export function ShibirRoute() {
         navigate("/Nashik-details");
         break;
 
+      case 'Dhule':
+        navigate("/Dhule-details");
+        break;
+
+      case 'Ellora':
+        navigate("/Ellora-details");
+        break;
+
 
       default:
         break;
@@ -57,9 +65,9 @@ export function ShibirRoute() {
   };
 
 
-  const TimeSlot = ({ time, location }) => (
+  const TimeSlot = ({ date, location }) => (
     <TimeSlotWrapper>
-      <TimeDisplay>Schedule</TimeDisplay>
+      <TimeDisplay>{date}</TimeDisplay>
       <LocationDisplay onClick={() => handleClick(location)}>
         <LocationName>{location}</LocationName>
         <LocationMarker>
@@ -82,12 +90,12 @@ export function ShibirRoute() {
       <TimeSlotContainer style={{ margin: "20px 0" }}>
         <MobileTimeSlots>
           {timeSlots.slice(0, 8).map((slot, index) => (
-            <TimeSlot key={index} time={slot.time} location={slot.location} />
+            <TimeSlot key={index} date={slot.date} location={slot.location} />
           ))}
         </MobileTimeSlots>
         <DesktopTimeSlots>
           {timeSlots.map((slot, index) => (
-            <TimeSlot key={index} time={slot.time} location={slot.location} />
+            <TimeSlot key={index} date={slot.date} location={slot.location} />
           ))}
         </DesktopTimeSlots>
       </TimeSlotContainer>
@@ -128,7 +136,7 @@ const DesktopTimeSlots = styled.div`
 
 const TimeSlotWrapper = styled.div`
   margin: 2px;
-
+  border-radius: 24px 24px 0 0;
   display: flex;
   width: 103px;
   flex-direction: column;
@@ -138,7 +146,7 @@ const TimeSlotWrapper = styled.div`
 const TimeDisplay = styled.div`
   padding: 16px;
   border-radius: 24px 24px 0 0;
-  background-color: var(--New-Light-Dark, #c394ff);
+  background: var(--again-new-gradient, linear-gradient(180deg, #C86FFF 0%, #BFA1FF 100%));
   color: rgba(39, 0, 37, 0.5);
   font: 500 12px/67% Rubik, sans-serif;
   font-weight: bold;a

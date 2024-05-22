@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthProvider";
+import { BACKEND_ENDPOINT } from "../api/api";
 
 function Button({ children, onClick }) {
   return (
@@ -100,7 +101,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "https://bharuchbaps.in/bharuchbaps.in/index.php/login/login",
+        `${BACKEND_ENDPOINT}/login/login`,
         {
           shibir_id: shibirID,
           password: password,
@@ -116,7 +117,23 @@ function Login() {
           response.data.user.shibir_id,
           response.data.user.permission.role,
           response.data.user.gender,
-          response.data.user.firstname
+          response.data.user.name,
+          response.data.user.phone_number,
+          response.data.user.emergency_number,
+          response.data.user.xetra,
+          response.data.user.mandal,
+          response.data.user.bus_detail,
+          response.data.user.bus_leader_1,
+          response.data.user.bus_leader_1_no,
+          response.data.user.bus_leader_2,
+          response.data.user.bus_leader_2_no,
+          response.data.user.nasik_utara,
+          response.data.user.pune_utara,
+          response.data.user.tithal_utara,
+          response.data.user.permission.view_mandal_attendance,
+          response.data.user.permission.edit_mandal_attendance,
+          response.data.user.permission.bus_leader,
+
         ); // Update the login state
         navigate("/home");
         // Redirect or further logic after successful login
@@ -171,7 +188,7 @@ function Login() {
               isOpen={isModalOpen}
               onClose={() => setModalOpen(false)}
             />
-            <Button onClick={handleLogin}>Let's take a tour of Shibir</Button>
+            <Button onClick={handleLogin}>Login</Button>
 
 
           </form>

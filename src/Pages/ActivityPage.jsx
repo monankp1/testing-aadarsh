@@ -1,81 +1,75 @@
-import * as React from "react";
+import React from 'react';
 import styled from "styled-components";
 import { BottomNavigationBar } from "../components/BottomNavigationBar";
 import { useNavigate } from "react-router-dom";
 import QuizStarter from "../components/QuizStarter";
 
-function ScorePage() {
-  const navigate = useNavigate();
+const ActivityPage = () => {
+    const navigate = useNavigate();
 
-  return (
-    <Container>
-      <BackButton onClick={() => navigate("/home")}>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-          alt="Back button"
-        />
-      </BackButton>
-      <Header>
-        <Profile>
-          <ProfileImage
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/ab67d02a8b8ad216eae4c696c2a0e629a71d161cc2bc274895d9505e7b4ec172?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-            alt="Profile"
-          />
-          <ProfileName>Your Score</ProfileName>
-        </Profile>
-      </Header>
-      <Content>
-        <Card>
-          <CardHeader>
-            <CardTitle>Know my guru</CardTitle>
-            <CardDescription>
-              Let's dive into the divine life of our beloved Guruhari Pramukh Swami Maharaj
-            </CardDescription>
-          </CardHeader>
-          <CardBody>
-            <CardImage
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/ba2932fbe8a110926d9f90421f1ad2cb5b5560f4bc9f4535c3dbfcb58ecdf4fe?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-              alt="Guruhari Pramukh Swami Maharaj"
+    return (
+        <Container>
+            <BackButton onClick={() => navigate(-1)}
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+                alt="Back icon"
             />
-            <ScoreDisplay>
-              <ScoreEmoji>🎉</ScoreEmoji>
-              <ScoreLabel>Your Score</ScoreLabel>
-              <ScoreValue>
-                12<MaxScore>/15</MaxScore>
-              </ScoreValue>
-            </ScoreDisplay>
-          </CardBody>
-        </Card>
-      </Content>
-      <QuizStarter />
-      <BottomNavContainer>
-        <BottomNavigationBar />
-      </BottomNavContainer>
-    </Container>
-  );
+            <BottomNavigationBar />
+            <Header>
+                <Profile>
+                    <ProfileImage
+                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/ab67d02a8b8ad216eae4c696c2a0e629a71d161cc2bc274895d9505e7b4ec172?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+                        alt="Profile"
+                    />
+                    <ProfileName>Your Score</ProfileName>
+                </Profile>
+            </Header>
+            <Content>
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Know my guru</CardTitle>
+                        <CardDescription>
+                            Let's dive into the divine life of our beloved Guruhari Pramukh Swami Maharaj
+                        </CardDescription>
+                    </CardHeader>
+                    <CardBody>
+                        <CardImage
+                            src="https://cdn.builder.io/api/v1/image/assets/TEMP/ba2932fbe8a110926d9f90421f1ad2cb5b5560f4bc9f4535c3dbfcb58ecdf4fe?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+                            alt="Guruhari Pramukh Swami Maharaj"
+                        />
+                        <ScoreDisplay>
+                            <ScoreEmoji>🎉</ScoreEmoji>
+                            <ScoreLabel>Your Score</ScoreLabel>
+                            <ScoreValue>
+                                12<MaxScore>/15</MaxScore>
+                            </ScoreValue>
+                        </ScoreDisplay>
+                    </CardBody>
+                </Card>
+            </Content>
+            <QuizStarter />
+        </Container>
+    )
 }
+
 
 const Container = styled.div`
   min-height: 100vh;
   background: linear-gradient(180deg, #ffffff 0%, #e2c2ff 100%);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 1rem;
   position: relative;
-  padding-bottom: 70px; /* Height of the bottom navigation bar */
 `;
 
-const BackButton = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 1rem;
+
+const BackButton = styled.img`
+  width: 13px;
+  aspect-ratio: 0.65;
+  object-fit: auto;
   position: absolute;
   top: 20px;
   left: 20px;
 `;
+
 
 const Header = styled.header`
   display: flex;
@@ -229,4 +223,4 @@ const BottomNavContainer = styled.div`
   width: 100%;
 `;
 
-export default ScorePage;
+export default ActivityPage

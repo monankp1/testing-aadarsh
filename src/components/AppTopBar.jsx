@@ -23,7 +23,7 @@ export function AppTopBar() {
     <>
       <Div>
         <Div2>
-          <Div3>Hello, {authUser.name}!</Div3>
+          <Div3>Hello, {authUser.name}</Div3>
           <Div4>
             <span
               style={{
@@ -77,7 +77,7 @@ const Div2 = styled.div`
 
 const Div3 = styled.div`
   color: var(--BG-Pink, #270025);
-  font: 700 30px Overlock, sans-serif;
+  font: 600 25px Overlock, sans-serif;
 `;
 
 const Div4 = styled.div`

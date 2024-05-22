@@ -32,8 +32,8 @@ export const AuthProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  const login = (id, role, gender, name) => {
-    const userInfo = { id, role, gender, name };
+  const login = (id, role, gender, name, phone_number, emergency_number, xetra, mandal, bus_detail, bus_leader_1, bus_leader_1_no, bus_leader_2, bus_leader_2_no, nasik_utara, pune_utara, tithal_utara, view_mandal_attendance, edit_mandal_attendance, bus_leader) => {
+    const userInfo = { id, role, gender, name, phone_number, emergency_number, xetra, mandal, bus_detail, bus_leader_1, bus_leader_1_no, bus_leader_2, bus_leader_2_no, nasik_utara, pune_utara, tithal_utara, view_mandal_attendance, edit_mandal_attendance, bus_leader };
     localStorage.setItem("user", JSON.stringify(userInfo));
     setUser(userInfo);
   };
