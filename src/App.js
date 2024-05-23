@@ -23,7 +23,8 @@ import Score from "./Pages/Score";
 import LostAndFound from "./Pages/LostAndFound";
 import AddFoundItem from "./Pages/AddFoundItem";
 
-import PlayActivity from "./Pages/playActivity";
+// import PlayActivity from "./Pages/playActivity";
+import PlayQuiz from "./Pages/playActivity";
 import Dhule from "./Pages/routeDetails/Dhule";
 import Ellora from "./Pages/routeDetails/Ellora";
 import BusDetails from "./Pages/detailview/BusDetails";
@@ -187,7 +188,7 @@ function App() {
             path="/play-activity"
             element={
               <PrivateRoute>
-                <PlayActivity />
+                <PlayQuiz />
               </PrivateRoute>
             }
           />

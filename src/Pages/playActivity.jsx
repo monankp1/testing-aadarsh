@@ -4,7 +4,9 @@ import { IconButton } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
 import Questions from "../components/Questions";
-export function playQuize() {
+
+
+function PlayQuiz() {
   const navigate = useNavigate(); //
   return (
     <>
@@ -172,4 +174,4 @@ const MemoriesLink = styled.a`
   }
 `;
 
-export default playQuize;
+export default PlayQuiz;

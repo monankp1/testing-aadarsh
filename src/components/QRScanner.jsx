@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { QrReader } from "react-qr-reader";
+import QrScanner from "react-qr-scanner";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthProvider"; // Assuming you have an AuthProvider
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const QRScanner = ({ handleError }) => {
+const QRScan = ({ handleError }) => {
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false); // Added state to track if processing
   const { user: authUser } = useAuth(); // Assuming the authUser contains the current user's info
@@ -57,10 +57,17 @@ const QRScanner = ({ handleError }) => {
     <div style={{ width: "100%" }}>
       {isScannerOpen ? (
         <div>
-          <button onClick={handleCloseScanner} style={{ marginBottom: "10px" }}>
+          <button onClick={handleCloseScanner}
+            style={{
+              marginBottom: "10px", borderRadius: "8px",
+              border: "0.5px solid rgba(29, 15, 42, 0.50)",
+              background: "linear-gradient(180deg, #270025 0%, #1D0F2A 100%)",
+              color: "white",
+              padding: "10px 20px",
+            }}>
             Close Scanner
           </button>
-          <QrReader
+          <QrScanner
             delay={300}
             constraints={{ facingMode: "environment" }}
             onResult={handleResult}
@@ -68,7 +75,14 @@ const QRScanner = ({ handleError }) => {
           />
         </div>
       ) : (
-        <button onClick={handleOpenScanner} style={{ marginBottom: "10px" }}>
+        <button onClick={handleOpenScanner}
+          style={{
+            marginBottom: "10px", borderRadius: "8px",
+            border: "0.5px solid rgba(29, 15, 42, 0.50)",
+            background: "linear-gradient(180deg, #270025 0%, #1D0F2A 100%)",
+            color: "white",
+            padding: "10px 20px",
+          }}>
           Open Scanner
         </button>
       )}
@@ -77,4 +91,4 @@ const QRScanner = ({ handleError }) => {
   );
 };
 
-export default QRScanner;
+export default QRScan;

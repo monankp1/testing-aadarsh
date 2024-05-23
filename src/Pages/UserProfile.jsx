@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { BottomNavigationBar } from "../components/BottomNavigationBar";
-import QRScanner from "../components/QRScanner";
+import QRScan from "../components/QRScanner";
 
 export function UserProfile() {
   const [result, setResult] = useState("");
@@ -128,7 +128,8 @@ export function UserProfile() {
 
 
             {user?.permission.edit_mandal_attendance == "yes" && (
-              <QRScanner
+              <QRScan
+
                 handleScan={handleScan}
                 handleError={handleError}
                 handleClose={handleCloseScanner} // Pass this if you want to handle close inside the QRScanner component
