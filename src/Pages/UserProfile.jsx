@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { BottomNavigationBar } from "../components/BottomNavigationBar";
 import QRScan from "../components/QRScanner";
+import QRBapa from '../resources/BHYK001.jpg';
 
 export function UserProfile() {
   const [result, setResult] = useState("");
@@ -139,7 +140,8 @@ export function UserProfile() {
               <Div5>
                 <Img2
                   loading="lazy"
-                  src={user?.qr_code}
+                  // src={user?.qr_code} //for all yuvak yuvtis
+                  src={QRBapa} //for bapa 
                 />
                 <Div6>{user?.shibir_id}</Div6>
               </Div5>
@@ -370,7 +372,7 @@ export function UserProfile() {
                   </Div23>
                 </Div15>
               </Div14>
-              {['BHYK218', 'BHYK345', 'BHYK155', 'BHYK254', 'BHYK163', 'BHYK167', 'AKYK027', 'AKYK021'].includes(access.id) && <button
+              {['BHYK218', 'BHYK001', 'BHYK345', 'BHYK155', 'BHYK254', 'BHYK163', 'BHYK167', 'AKYK027', 'AKYK021'].includes(access.id) && <button
                 style={{
                   display: 'flex',
                   padding: '8px 10px',

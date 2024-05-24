@@ -2,46 +2,42 @@ import React from "react";
 import styled from "styled-components";
 
 const images = [
-  // {
-  //   src: "https://uc81deed2a3023407aa55608af2d.previews.dropboxusercontent.com/p/thumb/ACRLxJJIc3B4lpMxHUp1YZB6kG68GGy3cO9bsAA7PxsxjiWFbx-9zugxzXz22juZ4i5C34rRlXVlLYwBAMV_VOwN8USxdLWiwb6BzClA2VswPPhauefrJEcjjxeg23xe3lXm-bHgjutLylKXkrnjE_I3uayIBqsBTvIp7spivjlKXoHIY8lZKYqQlQyOmUB_AVkFR2EOxaIY9p22kbcM-lxrJbriU5PBdvYjFJOY0vvIrCCA0Tf_k4PbsEUiGKKRPGY98kt0sRra1PI1iHyt4pe6xAkTTkazQXe-XY5_dEPxsk3p4_oe4G05YVhmLvlgo5AmnE6-PJMIRE7Zu1mC0JP2rHSHN8CyTPzmH-UsoktM3_JzGNVtjmEHmsnd9QhOlrk/p.jpeg",
-  //   aspectRatio: 1.41,
-  // },
   {
-    src: "https://www.imagicaaworld.com/wp-content/uploads/2023/08/about_imagicaa_1.jpg",
-    aspectRatio: 1.52,
-  },
-  {
-    src: "https://www.baps.org/Data/Sites/1/Media/GalleryImages/29506/webimages/BAPS_Bengali_Karyakar_Shibir_Kolkata_04.jpg",
+    src: "https://www.baps.org/Data/Sites/1/Media/GalleryImages/5684/WebImages/054-19-8f.jpg",
     aspectRatio: 1,
   },
   {
-    src: "https://cdn.builder.io/api/v1/image/assets/TEMP/38527bb4d0dbe7fee8f5276d2e55e7aa143c73fd48ba2aa77c614f008c1072b9?apiKey=3250d16d0ad044539de68d3e33600ce8&",
-    aspectRatio: 0.58,
-  },
-  {
-    src: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca046a62429c37a5d23bb1958ac42ad182f0ee37fd489e5948612e413e1fc012?apiKey=3250d16d0ad044539de68d3e33600ce8&",
+    src: "https://www.baps.org/Data/Sites/1/Media/GalleryImages/13082/WebImages/2016_11_21_005_Bharuch.jpg",
     aspectRatio: 1.41,
   },
   {
-    src: "https://cdn.builder.io/api/v1/image/assets/TEMP/2058f006274fe8afdffa2609554ede924c7b1e2aa64a48e21b0c6e19ca6a3532?apiKey=3250d16d0ad044539de68d3e33600ce8&",
+    src: "https://www.baps.org/Data/Sites/1/Media/GalleryImages/19837/WebImages/2019_07_06_007_Bharuch.jpg",
     aspectRatio: 1.41,
   },
   {
-    src: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca046a62429c37a5d23bb1958ac42ad182f0ee37fd489e5948612e413e1fc012?apiKey=3250d16d0ad044539de68d3e33600ce8&",
-    aspectRatio: 1.52,
-  },
-  {
-    src: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca046a62429c37a5d23bb1958ac42ad182f0ee37fd489e5948612e413e1fc012?apiKey=3250d16d0ad044539de68d3e33600ce8&",
+    src: "https://www.baps.org/Data/Sites/1/Media/GalleryImages/19838/WebImages/2019_07_07_035_Bharuch.jpg",
     aspectRatio: 1,
   },
   {
-    src: "https://cdn.builder.io/api/v1/image/assets/TEMP/2058f006274fe8afdffa2609554ede924c7b1e2aa64a48e21b0c6e19ca6a3532?apiKey=3250d16d0ad044539de68d3e33600ce8&",
+    src: "https://www.baps.org/Data/Sites/1/Media/GalleryImages/19838/WebImages/2019_07_07_031_Bharuch.jpg ",
+    aspectRatio: 1.52,
+  },
+  {
+    src: "https://www.baps.org/Data/Sites/1/Media/GalleryImages/19857/WebImages/2019_07_10_049_Bharuch.jpg",
     aspectRatio: 0.58,
   },
   {
-    src: "https://cdn.builder.io/api/v1/image/assets/TEMP/ca046a62429c37a5d23bb1958ac42ad182f0ee37fd489e5948612e413e1fc012?apiKey=3250d16d0ad044539de68d3e33600ce8&",
+    src: "https://www.baps.org/Data/Sites/1/Media/GalleryImages/13083/WebImages/2016_11_22_002_Bharuch.jpg",
     aspectRatio: 1.41,
   },
+  {
+    src: "https://www.baps.org/Data/Sites/1/Media/GalleryImages/19838/WebImages/2019_07_07_007_Bharuch.jpg ",
+    aspectRatio: 1.52,
+  },
+  {
+    src: "https://www.baps.org/Data/Sites/1/Media/GalleryImages/4503/WebImages/20110708-014f.jpg",
+    aspectRatio: 0.58,
+  }
 ];
 
 function MemoriesSection() {
@@ -53,7 +49,7 @@ function MemoriesSection() {
           alt="Memories Icon"
         />
         <MemoriesTitle>Memories</MemoriesTitle>
-        <MemoriesLink>View All</MemoriesLink>
+        {/* <MemoriesLink>View All</MemoriesLink> */}
       </MemoriesHeader>
       <MemoriesGallery>
         {images.map((image, index) => (

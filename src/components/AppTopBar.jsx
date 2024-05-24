@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useAuth } from "../contexts/AuthProvider";
+import profile from "../resources/bapa_profile.jpg"
 
 export function AppTopBar() {
   const navigate = useNavigate(); // Hook to handle navigation
@@ -39,7 +40,9 @@ export function AppTopBar() {
         <Img
           onClick={handleIcon}
           loading="lazy"
-          srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+          src={profile}
+          style={{ 'border-radius': '50px' }}
+        // srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/55f06f002806fe3e473a108b24fe570bc3cc7f1e0579751b128084dd56066bde?apiKey=3250d16d0ad044539de68d3e33600ce8&"
         />
       </Div>
     </>

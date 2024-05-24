@@ -32,6 +32,7 @@ import MandalDetails from "./Pages/detailview/MandalDetails";
 import AdminDetails from "./Pages/detailview/AdminDetails";
 import ActivityPage from "./Pages/ActivityPage";
 import ShibirRoutess from "./Pages/ShibirRoutess";
+import BapaLogin from "./Pages/BapaLogin";
 
 
 function App() {

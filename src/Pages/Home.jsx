@@ -15,7 +15,7 @@ import ShibirRoute from "../components/ShibirRoute";
 import Notification from "../components/Notification";
 import MemoriesSection from "../components/Memories";
 import QuizStarter from "../components/QuizStarter";
-import ScheduleCard from "./karyakram/Karyakram";
+import ScheduleCard from "./karyakram/ScheduleCard";
 // import QRScanner from "../components/QRScanner";
 
 const Home = () => {

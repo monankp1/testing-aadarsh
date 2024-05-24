@@ -60,7 +60,7 @@ function SadgunLekhan() {
 
   return (
     <Container>
-      <BackButton onClick={() => navigate(-1)}
+      <BackButton onClick={() => navigate('/home')}
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
         alt="Back icon"
       />

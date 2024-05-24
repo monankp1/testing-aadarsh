@@ -30,6 +30,7 @@ const AdminDetails = () => {
 
     }, []);
 
+
     const handleClick = (yuvak) => {
         setSingleData(yuvak);
         setDetailedView(true);

@@ -120,10 +120,10 @@ function Notification() {
             <Datestamp>{formatDatestamp(latestNotification.date)} at {formatTimestamp(latestNotification.time)}</Datestamp>
           </CardHeader>
           <Message>
-            {latestNotification.announcement.length > 100
-              ? latestNotification.announcement.substring(0, 100) + '...'
+            {latestNotification.announcement.length > 250
+              ? latestNotification.announcement.substring(0, 250) + '...'
               : latestNotification.announcement}
-            {latestNotification.announcement.length > 100 && (
+            {latestNotification.announcement.length > 250 && (
               <ShowMoreButton onClick={handleShowDetailedAnnouncement}>Show more</ShowMoreButton>
             )}
           </Message>

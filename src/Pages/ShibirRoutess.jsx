@@ -7,100 +7,100 @@ import { BottomNavigationBar } from "../components/BottomNavigationBar";
 
 
 const timeSlots = [
-    { date: "May 28", location: "Bharuch" },
-    { date: "May 29", location: "Dhule" },
-    { date: "May 29", location: "Ellora" },
-    { date: "May 30", location: "Nashik" },
-    { date: "May 31", location: "Pune" },
-    { date: "June 1", location: "Imagicaa" },
-    { date: "June 2", location: "Tithal" },
-    { date: "June 2", location: "Bharuch" },
+  { date: "May 28", location: "Bharuch" },
+  { date: "May 29", location: "Dhule" },
+  { date: "May 29", location: "Ellora" },
+  { date: "May 30", location: "Nashik" },
+  { date: "May 31", location: "Pune" },
+  { date: "June 1", location: "Imagicaa" },
+  { date: "June 2", location: "Tithal" },
+  { date: "June 2", location: "Bharuch" },
 ];
 
 
 const ShibirRoutess = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleIcon = (location) => {
-        switch (location) {
-            case 'Bharuch':
-                navigate("/Bharuch-details");
-                break;
+  const handleIcon = (location) => {
+    switch (location) {
+      case 'Bharuch':
+        navigate("/Bharuch-details");
+        break;
 
-            case 'Navsari':
-                navigate("/Navsari-details");
-                break;
+      case 'Navsari':
+        navigate("/Navsari-details");
+        break;
 
-            case 'Pune':
-                navigate("/Pune-details");
-                break;
+      case 'Pune':
+        navigate("/Pune-details");
+        break;
 
-            case 'Tithal':
-                navigate("/Tithal-details");
-                break;
+      case 'Tithal':
+        navigate("/Tithal-details");
+        break;
 
-            case 'Imagicaa':
-                navigate("/Imagicaa-details");
-                break;
+      case 'Imagicaa':
+        navigate("/Imagicaa-details");
+        break;
 
-            case 'Nashik':
-                navigate("/Nashik-details");
-                break;
+      case 'Nashik':
+        navigate("/Nashik-details");
+        break;
 
-            case 'Dhule':
-                navigate("/Dhule-details");
-                break;
+      case 'Dhule':
+        navigate("/Dhule-details");
+        break;
 
-            case 'Ellora':
-                navigate("/Ellora-details");
-                break;
+      case 'Ellora':
+        navigate("/Ellora-details");
+        break;
 
 
-            default:
-                break;
-        }
-    };
+      default:
+        break;
+    }
+  };
 
-    return (
-        <PageContainer>
-            <BackButton onClick={() => navigate(-1)}
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                alt="Back icon"
-            />
-            <Header>
-                <Profile>
-                    <ProfileImage
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/1748993d8450ee1bcce7efb0b04e5d91974a0de7e3bf14584193c83fe6dfbbd0?apiKey=3250d16d0ad044539de68d3e33600ce8&"
-                        alt="Route Icon"
-                    />
+  return (
+    <PageContainer>
+      <BackButton onClick={() => navigate('/home')}
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/a9737027d53672d51e861c036db609e65e7478afbce397041e33ffa50b82a036?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+        alt="Back icon"
+      />
+      <Header>
+        <Profile>
+          <ProfileImage
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1748993d8450ee1bcce7efb0b04e5d91974a0de7e3bf14584193c83fe6dfbbd0?apiKey=3250d16d0ad044539de68d3e33600ce8&"
+            alt="Route Icon"
+          />
 
-                    <ProfileName>Shibir Yatra Route</ProfileName>
+          <ProfileName>Shibir Yatra Route</ProfileName>
 
-                </Profile>
+        </Profile>
 
-            </Header>
-            <TimeSlotContainer>
-                <DesktopTimeSlots>
-                    {timeSlots.map((slot, index) => (
-                        <TimeSlotWrapper>
-                            <TimeDisplay>
-                                <span style={{ fontWeight: '700', fontSize: '1rem', color: 'var(--BG-Purple, #1D0F2A)' }}>{slot.date}</span>
-                            </TimeDisplay>
-                            <LocationDisplay>
-                                <LocationName>{slot.location}</LocationName>
-                                <LocationMarker onClick={() => handleIcon(slot.location)}>
-                                    <InfoIcon className="icon" />
-                                </LocationMarker>
-                            </LocationDisplay>
-                        </TimeSlotWrapper>
-                    ))}
+      </Header>
+      <TimeSlotContainer>
+        <DesktopTimeSlots>
+          {timeSlots.map((slot, index) => (
+            <TimeSlotWrapper>
+              <TimeDisplay>
+                <span style={{ fontWeight: '700', fontSize: '1rem', color: 'var(--BG-Purple, #1D0F2A)' }}>{slot.date}</span>
+              </TimeDisplay>
+              <LocationDisplay>
+                <LocationName>{slot.location}</LocationName>
+                <LocationMarker onClick={() => handleIcon(slot.location)}>
+                  <InfoIcon className="icon" />
+                </LocationMarker>
+              </LocationDisplay>
+            </TimeSlotWrapper>
+          ))}
 
-                </DesktopTimeSlots>
-            </TimeSlotContainer>
-            <BottomNavigationBar />
+        </DesktopTimeSlots>
+      </TimeSlotContainer>
+      <BottomNavigationBar />
 
-        </PageContainer>
-    )
+    </PageContainer>
+  )
 }
 
 const PageContainer = styled.div`
